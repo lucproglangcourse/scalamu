@@ -137,6 +137,7 @@ def depth: Algebra[Int, ExprF, Int]= _ => {
   case Div  (l, r) => 1 + math.max(l, r)
   case Mod  (l, r) => 1 + math.max(l, r)
 }
+
 TestFixtures.complex1.cata(depth) assert_=== 4
 TestFixtures.complex2.cata(depth) assert_=== 5
 
