@@ -80,7 +80,7 @@ Cofree.unfoldC(7)(fromInt).map(_ => ()).cata(toInt) assert_=== 7
  * @return the result of adding the receiver of cata to the starting point
  */
 def plus(m: Nat): Algebra[Option, Nat] = _ => {
-  case None     => m
+  case None    => m
   case Some(n) => succ(n)
 }
 
