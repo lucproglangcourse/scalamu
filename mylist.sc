@@ -32,11 +32,7 @@ def cons[A](head: A, tail: MyList[A]): MyList[A] = Cofree(head, Some(tail))
 val list0: MyList[String] = nil("dummy")
 val list1: MyList[String] = cons("hello", list0)
 val list2: MyList[String] = cons("world", list1)
-
-
 val list3: MyList[String] = cons("good morning", list2)
-
-
 
 /**
  * Algebra for carrier object Int in category Scala types.
