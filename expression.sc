@@ -23,7 +23,7 @@ import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
  * @tparam A carrier object of the F-algebra
  */
 sealed trait ExprF[+A]
-case class Constant(value: Int)        extends ExprF[Nothing]
+case object Constant                   extends ExprF[Nothing]
 case class UMinus[A](expr: A)          extends ExprF[A]
 case class Plus [A](left: A, right: A) extends ExprF[A]
 case class Minus[A](left: A, right: A) extends ExprF[A]
@@ -36,7 +36,7 @@ case class Mod  [A](left: A, right: A) extends ExprF[A]
  */
 implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
   def map[A, B](fa: ExprF[A])(f: A => B): ExprF[B] = fa match {
-    case Constant(c) => Constant(c)
+    case Constant    => Constant
     case UMinus(r)   => UMinus(f(r))
     case Plus (l, r) => Plus (f(l), f(r))
     case Minus(l, r) => Minus(f(l), f(r))
@@ -49,16 +49,16 @@ implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
 /**
  * Fixed point of ExprF as carrier object for initial algebra.
  */
-type Expr = Cofree[ExprF, Unit]
+type Expr = Cofree[ExprF, Int]
 
 object ExprFactory {
-  def constant(c: Int): Expr        = Cofree((), Constant(c))
-  def uminus(r: Expr): Expr         = Cofree((), UMinus(r))
-  def plus (l: Expr, r: Expr): Expr = Cofree((), Plus (l, r))
-  def minus(l: Expr, r: Expr): Expr = Cofree((), Minus(l, r))
-  def times(l: Expr, r: Expr): Expr = Cofree((), Times(l, r))
-  def div  (l: Expr, r: Expr): Expr = Cofree((), Div  (l, r))
-  def mod  (l: Expr, r: Expr): Expr = Cofree((), Mod  (l, r))
+  def constant(c: Int): Expr        = Cofree(c, Constant)
+  def uminus(r: Expr): Expr         = Cofree(0, UMinus(r))
+  def plus (l: Expr, r: Expr): Expr = Cofree(0, Plus (l, r))
+  def minus(l: Expr, r: Expr): Expr = Cofree(0, Minus(l, r))
+  def times(l: Expr, r: Expr): Expr = Cofree(0, Times(l, r))
+  def div  (l: Expr, r: Expr): Expr = Cofree(0, Div  (l, r))
+  def mod  (l: Expr, r: Expr): Expr = Cofree(0, Mod  (l, r))
 }
 import ExprFactory._
 
@@ -102,8 +102,8 @@ object TestFixtures {
 
 // specific algebras: note nonrecursive nature
 
-def evaluate: Algebra[ExprF, Int] = _ => {
-  case Constant(c) => c
+def evaluate: Algebra[Int, ExprF, Int] = c => {
+  case Constant    => c
   case UMinus(r)   => -r
   case Plus (l, r) => l + r
   case Minus(l, r) => l - r
@@ -115,8 +115,8 @@ def evaluate: Algebra[ExprF, Int] = _ => {
 TestFixtures.complex1.cata(evaluate) assert_=== -1
 TestFixtures.complex2.cata(evaluate) assert_=== 0
 
-def size: Algebra[ExprF, Int] = _ => {
-  case Constant(c) => 1
+def size: Algebra[Int, ExprF, Int] = _ => {
+  case Constant    => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + l + r
   case Minus(l, r) => 1 + l + r
@@ -128,8 +128,8 @@ def size: Algebra[ExprF, Int] = _ => {
 TestFixtures.complex1.cata(size) assert_=== 9
 TestFixtures.complex2.cata(size) assert_=== 10
 
-def depth: Algebra[ExprF, Int]= _ => {
-  case Constant(c) => 1
+def depth: Algebra[Int, ExprF, Int]= _ => {
+  case Constant    => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + math.max(l, r)
   case Minus(l, r) => 1 + math.max(l, r)

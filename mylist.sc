@@ -32,7 +32,11 @@ def cons[A](head: A, tail: MyList[A]): MyList[A] = Cofree(head, Some(tail))
 val list0: MyList[String] = nil("dummy")
 val list1: MyList[String] = cons("hello", list0)
 val list2: MyList[String] = cons("world", list1)
+
+
 val list3: MyList[String] = cons("good morning", list2)
+
+
 
 /**
  * Algebra for carrier object Int in category Scala types.
@@ -40,7 +44,7 @@ val list3: MyList[String] = cons("good morning", list2)
  *
  * @tparam A generic item type of the F-algebra
  */
-def length[A]: GenericAlgebra[A, Option, Int] = _ => {
+def length[A]: Algebra[A, Option, Int] = _ => {
   case None    => 0     // end of list:  0
   case Some(n) => 1 + n // regular node: add 1 to sum accumulated so far
 }
@@ -53,12 +57,14 @@ list3.cata(length) assert_=== 3
 /**
  * Another algebra for carrier object Int but specific item type, also Int.
  */
-def sum: GenericAlgebra[Int, Option, Int] = v => {
+def sum: Algebra[Int, Option, Int] = v => {
   case None    => 0     // end of list:  0
   case Some(n) => v + n // regular node: add value to sum accumulated so far
 }
 
 val list4: MyList[Int] = Cofree(4, Some(Cofree(3, Some(Cofree(2, Some(Cofree(1, Some(Cofree(-1, None)))))))))
+
+
 list4.cata(sum) assert_=== 10
 
 /**
