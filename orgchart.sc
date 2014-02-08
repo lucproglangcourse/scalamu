@@ -50,6 +50,7 @@ type Node[+T] = Cofree[NodeF, T]
  */
 def p[T](value: T): Node[T]                      = Cofree(value, P)
 def ou[T](value: T, children: Node[T]*): Node[T] = Cofree(value, OU(children: _*))
+
 val org =
   ou(("The Outfit", 50),
     p(("CEO", 140)),
