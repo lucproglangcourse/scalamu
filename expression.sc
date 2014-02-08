@@ -20,7 +20,7 @@ import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
 /**
  * Endofunctor for (non-generic) F-algebra in the category Scala types:
  *
- * @tparam A the required type parameter of the functor
+ * @tparam A carrier object of the F-algebra
  */
 sealed trait ExprF[+A]
 case class Constant(value: Int)        extends ExprF[Nothing]
@@ -61,6 +61,8 @@ object ExprFactory {
   def mod  (l: Expr, r: Expr): Expr = Cofree((), Mod  (l, r))
 }
 import ExprFactory._
+
+// some instances
 
 object TestFixtures {
   val complex1 =

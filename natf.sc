@@ -21,6 +21,8 @@ import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
  * Endofunctor for (non-generic) F-algebra in the category Scala types:
  *
  * data NatF[+A] = Zero | Succ(n: A)
+ *
+ * @tparam A carrier object of the F-algebra
  */
 sealed trait NatF[+A]
 case object Zero extends NatF[Nothing]
@@ -37,14 +39,6 @@ implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
 }
 
 /**
- * Algebra for carrier object Int in category Scala types:
- */
-def toInt: Algebra[NatF, Int] = _ => {
-  case Zero    => 0
-  case Succ(n) => n + 1
-}
-
-/**
  * Fixed point of NatF (recursive type based on NatF)
  * as carrier object for initial algebra.
  */
@@ -56,9 +50,21 @@ type Nat = Cofree[NatF, Unit]
 val zero: Nat         = Cofree((), Zero)
 def succ(n: Nat): Nat = Cofree((), Succ(n))
 
+// some instances
+
 val one:    Nat = succ(zero)
 val two:    Nat = succ(one)
 val three:  Nat = succ(two)
+
+/**
+ * Algebra for carrier object Int in category Scala types:
+ */
+def toInt: Algebra[NatF, Int] = _ => {
+  case Zero    => 0
+  case Succ(n) => n + 1
+}
+
+// now we can fold the toInt algebra into instances
 
 zero.cata(toInt)  assert_=== 0
 three.cata(toInt) assert_=== 3

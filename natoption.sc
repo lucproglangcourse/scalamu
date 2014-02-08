@@ -24,14 +24,6 @@ import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
  */
 
 /**
- * Algebra for carrier object Int in category Scala types:
- */
-def toInt: Algebra[Option, Int] = _ => {
-  case None    => 0
-  case Some(n) => n + 1
-}
-
-/**
  * Fixed point of NatF (recursive type based on NatF)
  * as carrier object for initial algebra.
  */
@@ -43,9 +35,21 @@ type Nat = Cofree[Option, Unit]
 val zero: Nat         = Cofree((), None)
 def succ(n: Nat): Nat = Cofree((), Some(n))
 
+// some instances
+
 val one:    Nat = succ(zero)
 val two:    Nat = succ(one)
 val three:  Nat = succ(two)
+
+/**
+ * Algebra for carrier object Int in category Scala types:
+ */
+def toInt: Algebra[Option, Int] = _ => {
+  case None    => 0
+  case Some(n) => n + 1
+}
+
+// now we can fold the toInt algebra into instances
 
 zero.cata(toInt)  assert_=== 0
 three.cata(toInt) assert_=== 3
