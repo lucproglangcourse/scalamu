@@ -87,10 +87,11 @@ def incBy(perc: Float)(num: Int): Int = scala.math.round(num.toFloat * (100 + pe
 val orgAfterRaise = org map (incBy(2.5f) _).second
 
 orgAfterRaise.tail.asInstanceOf[OU[Node[(String, Int)]]].children(0).head._2 assert_=== 144
-// TODO scalaz lenses
 
 val orgSanitized = orgAfterRaise map { _._1 }
 
 orgSanitized.head assert_=== "The Outfit"
+
+// TODO scalaz lenses to give raise to single person
 
 println("yahoo")
