@@ -10,7 +10,7 @@ For now, please just clone this project and play around with it.
 
 # Quick Start
 
-Natural numbers as initial algebra of `Option` endofunctor.
+Natural numbers as the initial F-algebra of the `Option` endofunctor.
 
     import scalaz._
     import Scalaz._
