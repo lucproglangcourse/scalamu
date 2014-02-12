@@ -46,6 +46,7 @@ package object scalak {
 
     /**
      * Instance constructor.
+     *
      * @param value an instance of the branching functor
      * @tparam S the branching functor
      * @return the value wrapped as an instance of the fixpoint
@@ -54,6 +55,7 @@ package object scalak {
 
     /**
      * Extractor for pattern matching.
+     *
      * @param node an instance of the fixpoint wrapped around an instance of the branching functor
      * @tparam S the branching functor
      * @return the instance of the branching functor
