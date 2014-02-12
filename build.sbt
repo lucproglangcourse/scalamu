@@ -1,4 +1,4 @@
-name := "algebraic-explorations-scala"
+name := "scalak"
 
 version := "0.0.3"
 

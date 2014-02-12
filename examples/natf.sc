@@ -26,7 +26,7 @@ case object Zero extends NatF[Nothing]
 case class Succ[A](n: A) extends NatF[A]
 
 /**
- * Implicit value for declaring NatF as a Functor in scalak.
+ * Implicit value for declaring NatF as a Functor in scalaz.
  */
 implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {

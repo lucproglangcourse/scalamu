@@ -24,7 +24,7 @@ case object P extends NodeF[Nothing]
 case class OU[A](children: A*) extends NodeF[A]
 
 /**
- * Implicit value for declaring NodeF as a Functor in scalak.
+ * Implicit value for declaring NodeF as a Functor in scalaz.
  */
 implicit val NodeFunctor: Functor[NodeF] = new Functor[NodeF] {
   def map[A, B](fa: NodeF[A])(f: A => B): NodeF[B] = fa match {

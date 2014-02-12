@@ -29,7 +29,7 @@ case class Div  [A](left: A, right: A) extends ExprF[A]
 case class Mod  [A](left: A, right: A) extends ExprF[A]
 
 /**
- * Implicit value for declaring ExprF as a Functor in scalak.
+ * Implicit value for declaring ExprF as a Functor in scalaz.
  */
 implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
   def map[A, B](fa: ExprF[A])(f: A => B): ExprF[B] = fa match {
