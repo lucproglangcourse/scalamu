@@ -1,19 +1,14 @@
-import scalaz.Cofree
-import scalaz.Functor
-import scalaz.Monad
-import scalaz.Equal
+import scalaz.{ Cofree, Equal, Functor, Monad }
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.string._     // for assert_=== to work on strings
 import scalaz.std.tuple._      // provides standard instances of tuple types
 import scalaz.std.function._   // provides standard instances of common function types
+import scalaz.syntax.arrow._   // provides arrow operators used below
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
-import scalaz.syntax.arrow._
-import scalaz.syntax.arrow._   // provides arrow operators used below
 import scalaz.syntax.id._      // provides |> (forward pipe like in F#)
 
-import edu.luc.cs.scalaz._           // algebra types
-import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
+import edu.luc.cs.scalak._     // algebra types and injected cata method
 
 /**
  * Endofunctor for (generic) F-algebra in the category Scala types.
@@ -29,7 +24,7 @@ case object P extends NodeF[Nothing]
 case class OU[A](children: A*) extends NodeF[A]
 
 /**
- * Implicit value for declaring NodeF as a Functor in scalaz.
+ * Implicit value for declaring NodeF as a Functor in scalak.
  */
 implicit val NodeFunctor: Functor[NodeF] = new Functor[NodeF] {
   def map[A, B](fa: NodeF[A])(f: A => B): NodeF[B] = fa match {
@@ -68,14 +63,14 @@ val org =
 
 org.map(_._1.length).head assert_=== 10
 
-def size[A]: Algebra[A, NodeF, Int] = _ => {
+def size[A]: GenericAlgebra[A, NodeF, Int] = _ => {
   case P => 1
   case OU(cs @ _*) => cs.sum
 }
 
 org.cata(size) assert_=== 7
 
-def depth[A]: Algebra[A, NodeF, Int] = _ => {
+def depth[A]: GenericAlgebra[A, NodeF, Int] = _ => {
   case P => 1
   case OU(cs @ _*) => 1 + cs.max
 }
@@ -92,6 +87,6 @@ val orgSanitized = orgAfterRaise map { _._1 }
 
 orgSanitized.head assert_=== "The Outfit"
 
-// TODO scalaz lenses to give raise to single person
+// TODO scalak lenses to give raise to single person
 
-println("yahoo")
+println("■")

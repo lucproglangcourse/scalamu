@@ -1,4 +1,4 @@
-package edu.luc.cs.scalaz
+package edu.luc.cs.scalak
 
 import scalaz.Tree
 import scalaz.std.stream._

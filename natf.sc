@@ -1,12 +1,9 @@
-import scalaz.Cofree
-import scalaz.Functor
-import scalaz.Equal
-import scalaz.std.anyVal._   // for assert_=== to work on basic values
-import scalaz.syntax.equal._ // for assert_===
+import scalaz.{ Cofree, Equal, Functor }
+import scalaz.std.anyVal._     // for assert_=== to work on basic values
+import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 
-import edu.luc.cs.scalaz._           // algebra types
-import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
+import edu.luc.cs.scalak._     // algebra types and injected cata method
 
 /*
  * In this example, we represent natural numbers as lists without item values:
@@ -29,7 +26,7 @@ case object Zero extends NatF[Nothing]
 case class Succ[A](n: A) extends NatF[A]
 
 /**
- * Implicit value for declaring NatF as a Functor in scalaz.
+ * Implicit value for declaring NatF as a Functor in scalak.
  */
 implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
@@ -42,16 +39,15 @@ implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
  * Fixed point of NatF (recursive type based on NatF)
  * as carrier object for initial algebra.
  */
-type Nat = Cofree[NatF, Unit]
+type Nat = µ[NatF]
 
 /**
  * Factory methods for convenience.
  */
-val zero: Nat         = Cofree((), Zero)
-def succ(n: Nat): Nat = Cofree((), Succ(n))
+val zero: Nat         = In(Zero)
+def succ(n: Nat): Nat = In(Succ(n))
 
 // some instances
-
 val one:    Nat = succ(zero)
 val two:    Nat = succ(one)
 val three:  Nat = succ(two)
@@ -59,13 +55,12 @@ val three:  Nat = succ(two)
 /**
  * Algebra for carrier object Int in category Scala types:
  */
-def toInt: Algebra[Unit, NatF, Int] = _ => {
+def toInt: Algebra[NatF, Int] = _ => {
   case Zero    => 0
   case Succ(n) => n + 1
 }
 
 // now we can fold the toInt algebra into instances
-
 zero.cata(toInt)  assert_=== 0
 three.cata(toInt) assert_=== 3
 
@@ -98,7 +93,7 @@ Cofree.unfoldC(7)(fromInt).map(_ => ()).cata(toInt) assert_=== 7
  * @param m the starting point
  * @return the result of adding the receiver of cata to the starting point
  */
-def plus(m: Nat): Algebra[Unit, NatF, Nat] = _ => {
+def plus(m: Nat): Algebra[NatF, Nat] = _ => {
   case Zero    => m
   case Succ(n) => succ(n)
 }
@@ -108,6 +103,6 @@ zero.cata(plus(three)).cata(toInt) assert_=== 3
 three.cata(plus(zero)).cata(toInt) assert_=== 3
 two.cata(plus(three)).cata(toInt)  assert_=== 5
 
-println("yahoo")
+println("■")
 
 // TODO paramorphism/factorial

@@ -1,13 +1,10 @@
-import scalaz.Cofree
-import scalaz.Functor
-import scalaz.Equal
+import scalaz.{ Equal, Functor }
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.option._     // for Option as Functor instance
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 
-import edu.luc.cs.scalaz._           // algebra types
-import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
+import edu.luc.cs.scalak._     // algebra types and injected cata method
 
 
 // TODO parsing/unfold
@@ -23,7 +20,7 @@ import edu.luc.cs.scalaz.CofreeOps._ // injected cata method
  * @tparam A carrier object of the F-algebra
  */
 sealed trait ExprF[+A]
-case object Constant                   extends ExprF[Nothing]
+case class Constant(value: Int)        extends ExprF[Nothing]
 case class UMinus[A](expr: A)          extends ExprF[A]
 case class Plus [A](left: A, right: A) extends ExprF[A]
 case class Minus[A](left: A, right: A) extends ExprF[A]
@@ -32,11 +29,11 @@ case class Div  [A](left: A, right: A) extends ExprF[A]
 case class Mod  [A](left: A, right: A) extends ExprF[A]
 
 /**
- * Implicit value for declaring ExprF as a Functor in scalaz.
+ * Implicit value for declaring ExprF as a Functor in scalak.
  */
 implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
   def map[A, B](fa: ExprF[A])(f: A => B): ExprF[B] = fa match {
-    case Constant    => Constant
+    case Constant(v) => Constant(v)
     case UMinus(r)   => UMinus(f(r))
     case Plus (l, r) => Plus (f(l), f(r))
     case Minus(l, r) => Minus(f(l), f(r))
@@ -47,18 +44,18 @@ implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
 }
 
 /**
- * Fixed point of ExprF as carrier object for initial algebra.
+ * Fixpoint of ExprF as carrier object for initial algebra.
  */
-type Expr = Cofree[ExprF, Int]
+type Expr = µ[ExprF]
 
 object ExprFactory {
-  def constant(c: Int): Expr        = Cofree(c, Constant)
-  def uminus(r: Expr): Expr         = Cofree(0, UMinus(r))
-  def plus (l: Expr, r: Expr): Expr = Cofree(0, Plus (l, r))
-  def minus(l: Expr, r: Expr): Expr = Cofree(0, Minus(l, r))
-  def times(l: Expr, r: Expr): Expr = Cofree(0, Times(l, r))
-  def div  (l: Expr, r: Expr): Expr = Cofree(0, Div  (l, r))
-  def mod  (l: Expr, r: Expr): Expr = Cofree(0, Mod  (l, r))
+  def constant(c: Int): Expr        = In(Constant(c))
+  def uminus(r: Expr): Expr         = In(UMinus(r))
+  def plus (l: Expr, r: Expr): Expr = In(Plus (l, r))
+  def minus(l: Expr, r: Expr): Expr = In(Minus(l, r))
+  def times(l: Expr, r: Expr): Expr = In(Times(l, r))
+  def div  (l: Expr, r: Expr): Expr = In(Div  (l, r))
+  def mod  (l: Expr, r: Expr): Expr = In(Mod  (l, r))
 }
 import ExprFactory._
 
@@ -102,8 +99,8 @@ object TestFixtures {
 
 // specific algebras: note nonrecursive nature
 
-def evaluate: Algebra[Int, ExprF, Int] = c => {
-  case Constant    => c
+def evaluate: Algebra[ExprF, Int] = _ => {
+  case Constant(c) => c
   case UMinus(r)   => -r
   case Plus (l, r) => l + r
   case Minus(l, r) => l - r
@@ -115,8 +112,8 @@ def evaluate: Algebra[Int, ExprF, Int] = c => {
 TestFixtures.complex1.cata(evaluate) assert_=== -1
 TestFixtures.complex2.cata(evaluate) assert_=== 0
 
-def size: Algebra[Int, ExprF, Int] = _ => {
-  case Constant    => 1
+def size: Algebra[ExprF, Int] = _ => {
+  case Constant(_) => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + l + r
   case Minus(l, r) => 1 + l + r
@@ -128,8 +125,8 @@ def size: Algebra[Int, ExprF, Int] = _ => {
 TestFixtures.complex1.cata(size) assert_=== 9
 TestFixtures.complex2.cata(size) assert_=== 10
 
-def depth: Algebra[Int, ExprF, Int]= _ => {
-  case Constant    => 1
+def depth: Algebra[ExprF, Int]= _ => {
+  case Constant(_) => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + math.max(l, r)
   case Minus(l, r) => 1 + math.max(l, r)
@@ -141,5 +138,4 @@ def depth: Algebra[Int, ExprF, Int]= _ => {
 TestFixtures.complex1.cata(depth) assert_=== 4
 TestFixtures.complex2.cata(depth) assert_=== 5
 
-println("yahoo")
-
+println("■")
