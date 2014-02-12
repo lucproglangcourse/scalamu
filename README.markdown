@@ -18,10 +18,10 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
 
     type Nat = µ[Option]
 
-    val zero: Nat         = In(None)
+    val zero:         Nat = In(None)
     def succ(n: Nat): Nat = In(Some(n))
 
-    val three:  Nat = succ(succ(succ(zero)))
+    val three: Nat = succ(succ(succ(zero)))
 
     def toInt: Algebra[Option, Int] = _ => {
       case None    => 0
