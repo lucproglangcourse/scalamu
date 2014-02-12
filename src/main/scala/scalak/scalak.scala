@@ -32,9 +32,9 @@ package object scalak {
   type Coalgebra[S[_], B] = B => S[B]
 
   /**
-   * The fixpoint operator on functors. 
+   * The fixpoint operator on functors.
    * Implemented as an instance of Cofree.
-   * 
+   *
    * @tparam S functor whose fixpoint we are forming
    */
   type µ[S[+_]] = Cofree[S, Unit]
@@ -62,16 +62,23 @@ package object scalak {
   }
 
   /**
-   * Catamorphism (generalizeld fold) for Cofree injected into Cofree class
+   * Wrapper to inject a useful methods into Cofree
    * (similar to C# extension methods).
-   *
-   * Note that this is the only place with explicit recursion in this example.
    *
    * @tparam S branching functor of this collection
    * @tparam A generic item type of this collection
-   *
    */
-  implicit class CofreeCata[S[+_], +A](self: Cofree[S, A]) {
+  implicit class CofreeOps[S[+_], +A](self: Cofree[S, A]) {
+
+    /**
+     * Catamorphism (generalizeld fold) for Cofree.
+     * Note that this is the only place with explicit recursion in this example.
+     *
+     * @param g function to apply to each node's value and partial results
+     *          already computed for its children
+     * @tparam B result type of the catamorphism
+     * @return the result of applying the g-based catamorphism to the root
+     */
     def cata[B](g: A => S[B] => B)(implicit S: Functor[S]): B =
       g(self.head)(self.tail map { _ cata g })
     // TODO paramorphism
