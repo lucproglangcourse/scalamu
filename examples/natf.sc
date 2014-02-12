@@ -3,7 +3,7 @@ import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 
-import edu.luc.cs.scalak._     // algebra types and injected cata method
+import scalak._     // algebra types and injected cata method
 
 /*
  * In this example, we represent natural numbers as lists without item values:

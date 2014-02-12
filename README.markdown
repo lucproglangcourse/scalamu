@@ -14,7 +14,7 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
 
     import scalaz._
     import Scalaz._
-    import edu.luc.cs.scalak._
+    import scalak._
 
     type Nat = µ[Option]
 

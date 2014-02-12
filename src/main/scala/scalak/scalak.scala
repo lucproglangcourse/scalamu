@@ -1,5 +1,3 @@
-package edu.luc.cs
-
 import scalaz.Cofree
 import scalaz.Functor
 import scalaz.syntax.functor._
