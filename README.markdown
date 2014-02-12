@@ -2,3 +2,30 @@
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
 examples for teaching algebraic data types as F-algebras.
+
+# Getting Scalak
+
+We are working on the proper packaging.
+For now, please just clone this project and play around with it.
+
+# Quick Start
+
+Natural numbers as initial algebra of `Option` endofunctor.
+
+    import scalaz._
+    import Scalaz._
+    import edu.luc.cs.scalak._
+
+    type Nat = µ[Option]
+
+    val zero: Nat         = In(None)
+    def succ(n: Nat): Nat = In(Some(n))
+
+    val three:  Nat = succ(succ(succ(zero)))
+
+    def toInt: Algebra[Option, Int] = _ => {
+      case None    => 0
+      case Some(n) => n + 1
+    }
+
+    three.cata(toInt) assert_=== 3
