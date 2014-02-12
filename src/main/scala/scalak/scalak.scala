@@ -10,7 +10,7 @@ package object scalak {
    * @tparam S branching constructor of the initial algebra
    * @tparam B carrier object of the algebra
    */
-  type Algebra[S[_], B] = Unit => S[B] => B
+  type Algebra[S[_], B] = S[B] => B
 
   /**
    * An algebra for a generic F-algebra.
@@ -82,5 +82,27 @@ package object scalak {
     def cata[B](g: A => S[B] => B)(implicit S: Functor[S]): B =
       g(self.head)(self.tail map { _ cata g })
     // TODO paramorphism
+  }
+
+  /**
+   * Wrapper to inject useful methods into µ.
+   *
+   * @tparam S endofunctor for this fixpoint
+   */
+  implicit class MuOps[S[+_]](self: µ[S]) {
+
+    /**
+     * Catamorphism (generalizeld fold) for µ.
+     * Note that this is the only other place with explicit recursion in this example.
+     *
+     * @param g function to apply to each node's value and partial results
+     *          already computed for its children
+     * @tparam B result type of the catamorphism
+     * @return the result of applying the g-based catamorphism to the root
+     */
+    def cata[B](g: S[B] => B)(implicit S: Functor[S]): B =
+      g(self.tail map { _ cata g })
+    // TODO paramorphism
+
   }
 }

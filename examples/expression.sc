@@ -99,7 +99,7 @@ object TestFixtures {
 
 // specific algebras: note nonrecursive nature
 
-def evaluate: Algebra[ExprF, Int] = _ => {
+def evaluate: Algebra[ExprF, Int] = {
   case Constant(c) => c
   case UMinus(r)   => -r
   case Plus (l, r) => l + r
@@ -112,7 +112,7 @@ def evaluate: Algebra[ExprF, Int] = _ => {
 TestFixtures.complex1.cata(evaluate) assert_=== -1
 TestFixtures.complex2.cata(evaluate) assert_=== 0
 
-def size: Algebra[ExprF, Int] = _ => {
+def size: Algebra[ExprF, Int] = {
   case Constant(_) => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + l + r
@@ -125,7 +125,7 @@ def size: Algebra[ExprF, Int] = _ => {
 TestFixtures.complex1.cata(size) assert_=== 9
 TestFixtures.complex2.cata(size) assert_=== 10
 
-def depth: Algebra[ExprF, Int]= _ => {
+def depth: Algebra[ExprF, Int]= {
   case Constant(_) => 1
   case UMinus(r)   => 1 + r
   case Plus (l, r) => 1 + math.max(l, r)

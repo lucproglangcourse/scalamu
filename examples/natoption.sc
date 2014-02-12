@@ -41,7 +41,7 @@ val three:  Nat = succ(two)
 /**
  * Algebra for carrier object Int in category Scala types:
  */
-def toInt: Algebra[Option, Int] = _ => {
+def toInt: Algebra[Option, Int] = {
   case None    => 0
   case Some(n) => n + 1
 }
@@ -80,7 +80,7 @@ Cofree.unfoldC(7)(fromInt).map(_ => ()).cata(toInt) assert_=== 7
  * @param m the starting point
  * @return the result of adding the receiver of cata to the starting point
  */
-def plus(m: Nat): Algebra[Option, Nat] = _ => {
+def plus(m: Nat): Algebra[Option, Nat] = {
   case None    => m
   case Some(n) => succ(n)
 }
