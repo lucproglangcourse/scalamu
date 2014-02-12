@@ -62,7 +62,7 @@ package object scalak {
   }
 
   /**
-   * Wrapper to inject a useful methods into Cofree
+   * Wrapper to inject useful methods into Cofree
    * (similar to C# extension methods).
    *
    * @tparam S branching functor of this collection
