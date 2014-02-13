@@ -8,7 +8,7 @@ import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 import scalaz.syntax.id._      // provides |> (forward pipe like in F#)
 
-import scalak._     // algebra types and injected cata method
+import scalak._                // algebra types and injected cata method
 
 /**
  * Endofunctor for (generic) F-algebra in the category Scala types.

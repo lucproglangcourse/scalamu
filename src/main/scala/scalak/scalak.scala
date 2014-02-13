@@ -103,6 +103,5 @@ package object scalak {
     def cata[B](g: S[B] => B)(implicit S: Functor[S]): B =
       g(self.tail map { _ cata g })
     // TODO paramorphism
-
   }
 }

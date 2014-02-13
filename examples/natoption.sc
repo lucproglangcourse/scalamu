@@ -3,8 +3,7 @@ import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.option._     // for Option as Functor instance
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
-
-import scalak._     // algebra types and injected cata method
+import scalak._                // algebra types and injected cata method
 
 /*
  * In this example, we represent natural numbers as lists without item values:
@@ -33,7 +32,6 @@ val zero: Nat         = In(None)
 def succ(n: Nat): Nat = In(Some(n))
 
 // some instances
-
 val one:    Nat = succ(zero)
 val two:    Nat = succ(one)
 val three:  Nat = succ(two)
@@ -49,7 +47,7 @@ def toInt: Algebra[Option, Int] = {
 // now we can fold the toInt algebra into instances
 
 zero.cata(toInt)  assert_=== 0
-three.cata(toInt) assert_=== 3
+three cata toInt  assert_=== 3
 
 /**
  * Coalgebra (generator for corecursion)
@@ -89,7 +87,6 @@ zero.cata(plus(zero)).cata(toInt)  assert_=== 0
 zero.cata(plus(three)).cata(toInt) assert_=== 3
 three.cata(plus(zero)).cata(toInt) assert_=== 3
 two.cata(plus(three)).cata(toInt)  assert_=== 5
-
 println("■")
 
 // TODO paramorphism/factorial
