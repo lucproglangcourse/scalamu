@@ -28,4 +28,4 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
       case Some(n) => n + 1
     }
 
-    three.cata(toInt) assert_=== 3
+    three cata toInt assert_=== 3
