@@ -1,7 +1,8 @@
 # Scalak
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
-examples for teaching algebraic data types as F-algebras.
+examples for teaching the software engineering benefits of defining
+algebraic data types as F-algebras.
 
 # Getting Scalak
 

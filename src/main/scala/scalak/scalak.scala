@@ -101,7 +101,7 @@ package object scalak {
      * @return the result of applying the g-based catamorphism to the root
      */
     def cata[B](g: S[B] => B)(implicit S: Functor[S]): B =
-      g(self.tail map { _ cata g })
+      new CofreeOps(self) cata { _ => g }
     // TODO paramorphism
   }
 }
