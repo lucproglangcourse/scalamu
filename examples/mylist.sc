@@ -23,15 +23,15 @@ type MyList[+A] = Cofree[Option, A]
 /**
  * Factory methods for convenience.
  */
-def nil[A](dummy: A): MyList[A]                  = Cofree(dummy, None) // need dummy because Cofree expects non-null
+def nil[A](dummy: A):                  MyList[A] = Cofree(dummy, None) // need dummy because Cofree expects non-null
 def cons[A](head: A, tail: MyList[A]): MyList[A] = Cofree(head, Some(tail))
 
 // some instances
 
-val list0: MyList[String] = nil("dummy")
-val list1: MyList[String] = cons("hello", list0)
-val list2: MyList[String] = cons("world", list1)
-val list3: MyList[String] = cons("good morning", list2)
+val list0 = nil("dummy")
+val list1 = cons("hello", list0)
+val list2 = cons("world", list1)
+val list3 = cons("good morning", list2)
 
 /**
  * Algebra for carrier object Int in category Scala types.
@@ -46,8 +46,8 @@ def length[A]: GenericAlgebra[A, Option, Int] = _ => {
 
 // now we can fold the length algebra into instances.
 
-list0.cata(length) assert_=== 0
-list3.cata(length) assert_=== 3
+list0 cata length assert_=== 0
+list3 cata length assert_=== 3
 
 /**
  * Another algebra for carrier object Int but specific item type, also Int.
@@ -57,10 +57,9 @@ def sum: GenericAlgebra[Int, Option, Int] = v => {
   case Some(n) => v + n // regular node: add value to sum accumulated so far
 }
 
-val list4: MyList[Int] = Cofree(4, Some(Cofree(3, Some(Cofree(2, Some(Cofree(1, Some(Cofree(-1, None)))))))))
+val list4 = cons(4, cons(3, cons(2, cons(1, nil(-1)))))
 
-
-list4.cata(sum) assert_=== 10
+list4 cata sum assert_=== 10
 
 /**
  * Coalgebra for carrier object Int in category Scala types.
@@ -76,7 +75,7 @@ def downFrom: Coalgebra[Option, Int] = (n: Int) => {
 /**
  * Now we can create instances by unfolding the coalgebra from a starting value.
  */
-Cofree.unfoldC(0)(downFrom).cata(length) //assert_=== 0 // Nil
-Cofree.unfoldC(8)(downFrom).cata(length) //assert_=== 4 // Seq(8, 4, 2, 1)
+Cofree.unfoldC(0)(downFrom) cata length assert_=== 0 // Nil
+Cofree.unfoldC(8)(downFrom) cata length assert_=== 4 // Seq(8, 4, 2, 1)
 
 println("■")

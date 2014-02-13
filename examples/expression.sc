@@ -109,8 +109,8 @@ def evaluate: Algebra[ExprF, Int] = {
   case Mod  (l, r) => l % r
 }
 
-TestFixtures.complex1.cata(evaluate) assert_=== -1
-TestFixtures.complex2.cata(evaluate) assert_=== 0
+TestFixtures.complex1 cata evaluate assert_=== -1
+TestFixtures.complex2 cata evaluate assert_=== 0
 
 def size: Algebra[ExprF, Int] = {
   case Constant(_) => 1
@@ -122,8 +122,8 @@ def size: Algebra[ExprF, Int] = {
   case Mod  (l, r) => 1 + l + r
 }
 
-TestFixtures.complex1.cata(size) assert_=== 9
-TestFixtures.complex2.cata(size) assert_=== 10
+TestFixtures.complex1 cata size assert_=== 9
+TestFixtures.complex2 cata size assert_=== 10
 
 def depth: Algebra[ExprF, Int]= {
   case Constant(_) => 1
@@ -135,7 +135,7 @@ def depth: Algebra[ExprF, Int]= {
   case Mod  (l, r) => 1 + math.max(l, r)
 }
 
-TestFixtures.complex1.cata(depth) assert_=== 4
-TestFixtures.complex2.cata(depth) assert_=== 5
+TestFixtures.complex1 cata depth assert_=== 4
+TestFixtures.complex2 cata depth assert_=== 5
 
 println("■")

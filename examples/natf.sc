@@ -61,8 +61,8 @@ def toInt: Algebra[NatF, Int] = {
 }
 
 // now we can fold the toInt algebra into instances
-zero.cata(toInt)  assert_=== 0
-three.cata(toInt) assert_=== 3
+zero  cata toInt assert_=== 0
+three cata toInt assert_=== 3
 
 /**
  * Coalgebra (generator for corecursion)
@@ -84,8 +84,8 @@ def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
  * because Cofree is generic in the item type and preserves it.
  * To avoid this, we would need a non-generic version of Cofree.
  */
-Cofree.unfoldC(0)(fromInt).map(_ => ()).cata(toInt) assert_=== 0
-Cofree.unfoldC(7)(fromInt).map(_ => ()).cata(toInt) assert_=== 7
+Cofree.unfoldC(0)(fromInt) map (_ => ()) cata toInt assert_=== 0
+Cofree.unfoldC(7)(fromInt) map (_ => ()) cata toInt assert_=== 7
 
 /**
  * Addition as an algebra for plugging into cata.
@@ -98,10 +98,10 @@ def plus(m: Nat): Algebra[NatF, Nat] = {
   case Succ(n) => succ(n)
 }
 
-zero.cata(plus(zero)).cata(toInt)  assert_=== 0
-zero.cata(plus(three)).cata(toInt) assert_=== 3
-three.cata(plus(zero)).cata(toInt) assert_=== 3
-two.cata(plus(three)).cata(toInt)  assert_=== 5
+zero  cata plus(zero)  cata toInt assert_=== 0
+zero  cata plus(three) cata toInt assert_=== 3
+three cata plus(zero)  cata toInt assert_=== 3
+two   cata plus(three) cata toInt assert_=== 5
 
 println("■")
 

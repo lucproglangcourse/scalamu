@@ -68,14 +68,14 @@ def size[A]: GenericAlgebra[A, NodeF, Int] = _ => {
   case OU(cs @ _*) => cs.sum
 }
 
-org.cata(size) assert_=== 7
+org cata size assert_=== 7
 
 def depth[A]: GenericAlgebra[A, NodeF, Int] = _ => {
   case P => 1
   case OU(cs @ _*) => 1 + cs.max
 }
 
-org.cata(depth) assert_=== 3
+org cata depth assert_=== 3
 
 def incBy(perc: Float)(num: Int): Int = scala.math.round(num.toFloat * (100 + perc) / 100)
 
