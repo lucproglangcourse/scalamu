@@ -31,7 +31,7 @@ package object scalak {
 
   /**
    * The fixpoint operator on functors.
-   * Implemented as an instance of Cofree.
+   * Implemented as a partial application of Cofree to Unit.
    *
    * @tparam S functor whose fixpoint we are forming
    */
