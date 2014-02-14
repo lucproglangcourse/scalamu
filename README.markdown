@@ -22,7 +22,7 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
     val zero:         Nat = In(None)
     def succ(n: Nat): Nat = In(Some(n))
 
-    val three: Nat = succ(succ(succ(zero)))
+    val three = succ(succ(succ(zero)))
 
     def toInt: Algebra[Option, Int] = {
       case None    => 0
