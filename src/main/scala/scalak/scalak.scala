@@ -37,6 +37,8 @@ package object scalak {
    */
   type µ[S[+_]] = Cofree[S, Unit]
 
+  type Mu[S[+_]] = µ[S]
+
   /**
    * Constructor and deconstructor for instances of fixpoint types of branching functors.
    */
@@ -104,4 +106,15 @@ package object scalak {
       new CofreeOps(self) cata { _ => g }
     // TODO paramorphism
   }
+
+  object µ {
+
+    /**
+     * Cofree corecursion with values at nodes converted to unit.
+     */
+    def unfold[F[+_], A](a: A)(f: A => F[A])(implicit F: Functor[F]): µ[F] =
+      Cofree.unfoldC(a)(f) map Function.const()
+  }
+
+  val Mu = µ
 }

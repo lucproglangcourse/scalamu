@@ -22,7 +22,10 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
     val zero:         Nat = In(None)
     def succ(n: Nat): Nat = In(Some(n))
 
-    val three = succ(succ(succ(zero)))
+    val two   = succ(succ(zero))
+    val three = succ(three)
+
+Conversion to `Int` as a catamorphism.
 
     def toInt: Algebra[Option, Int] = {
       case None    => 0
@@ -30,3 +33,20 @@ Natural numbers as the initial F-algebra of the `Option` endofunctor.
     }
 
     three cata toInt assert_=== 3
+
+Conversion from `Int` as an anamorphism
+
+    µ.unfold(7)(fromInt) cata toInt assert_=== 7
+
+Addition as another catamorphism.
+
+    def plus(m: Nat): Algebra[Option, Nat] = {
+      case None    => m
+      case Some(n) => succ(n)
+    }
+
+    two cata plus(three) cata toInt assert_=== 5
+
+# References
+
+[Understanding F-Algebras](https://www.fpcomplete.com/user/bartosz/understanding-algebras)

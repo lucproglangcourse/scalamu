@@ -70,10 +70,8 @@ three cata toInt assert_=== 3
  */
 def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
   require { n >= 0 }
-  if (n == 0)
-    Zero
-  else
-    Succ(n - 1)
+  if (n == 0) Zero
+  else        Succ(n - 1)
 }
 
 /*
@@ -84,8 +82,8 @@ def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
  * because Cofree is generic in the item type and preserves it.
  * To avoid this, we would need a non-generic version of Cofree.
  */
-Cofree.unfoldC(0)(fromInt) map (_ => ()) cata toInt assert_=== 0
-Cofree.unfoldC(7)(fromInt) map (_ => ()) cata toInt assert_=== 7
+µ.unfold(0)(fromInt) cata toInt assert_=== 0
+µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
 /**
  * Addition as an algebra for plugging into cata.
@@ -105,4 +103,5 @@ two   cata plus(three) cata toInt assert_=== 5
 
 println("■")
 
+// TODO multiplication
 // TODO paramorphism/factorial
