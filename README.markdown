@@ -34,7 +34,13 @@ Conversion to `Int` as a catamorphism.
 
     three cata toInt assert_=== 3
 
-Conversion from `Int` as an anamorphism
+Conversion from `Int` as an anamorphism.
+
+    def fromInt: Coalgebra[Option, Int] = (n: Int) => {
+      require { n >= 0 }
+      if (n == 0) None
+      else        Some(n - 1)
+    }
 
     µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
