@@ -1,8 +1,8 @@
 # Scalak
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
-examples for teaching the software engineering benefits of defining
-algebraic data types as F-algebras.
+examples for exploring and teaching the software engineering
+benefits of defining algebraic data types as intial F-algebras.
 
 # Getting Scalak
 
@@ -11,7 +11,7 @@ For now, please just clone this project and play around with it.
 
 # Quick Start
 
-Natural numbers as the initial F-algebra of the `Option` endofunctor.
+Natural numbers as the initial algebra of the `Option` endofunctor.
 
     import scalaz._
     import Scalaz._
@@ -38,8 +38,8 @@ Conversion from `Int` as an anamorphism.
 
     def fromInt: Coalgebra[Option, Int] = (n: Int) => {
       require { n >= 0 }
-      if (n == 0) None
-      else        Some(n - 1)
+      if   (n == 0) None
+      else          Some(n - 1)
     }
 
     µ.unfold(7)(fromInt) cata toInt assert_=== 7

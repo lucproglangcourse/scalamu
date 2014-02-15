@@ -48,9 +48,9 @@ val zero: Nat         = In(Zero)
 def succ(n: Nat): Nat = In(Succ(n))
 
 // some instances
-val one:    Nat = succ(zero)
-val two:    Nat = succ(one)
-val three:  Nat = succ(two)
+val one   = succ(zero)
+val two   = succ(one)
+val three = succ(two)
 
 /**
  * Algebra for carrier object Int in category Scala types:
@@ -70,8 +70,8 @@ three cata toInt assert_=== 3
  */
 def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
   require { n >= 0 }
-  if (n == 0) Zero
-  else        Succ(n - 1)
+  if   (n == 0) Zero
+  else          Succ(n - 1)
 }
 
 /*

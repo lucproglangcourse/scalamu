@@ -55,8 +55,8 @@ three cata toInt assert_=== 3
  */
 def fromInt: Coalgebra[Option, Int] = (n: Int) => {
   require { n >= 0 }
-  if (n == 0) None
-  else        Some(n - 1)
+  if   (n == 0) None
+  else          Some(n - 1)
 }
 
 /*

@@ -5,72 +5,74 @@ import scalaz.syntax.functor._
 package object scalak {
 
   /**
-   * An algebra for a (nongeneric) F-algebra.
+   * A morphism for a (nongeneric) F-algebra.
    *
-   * @tparam S branching constructor of the initial algebra
+   * @tparam F endofunctor (type constructor of arity 1) of the category of Scala types
    * @tparam B carrier object of the algebra
    */
-  type Algebra[S[_], B] = S[B] => B
+  type Algebra[F[_], B] = F[B] => B
 
   /**
-   * An algebra for a generic F-algebra.
+   * A morphism for a generic F-algebra.
    *
-   * @tparam A generic item type of the F-algebra (held by Cofree)
-   * @tparam S branching constructor of the initial algebra
+   * @tparam A generic item type of the F-algebra
+   *           (to be contained by an instance of Cofree)
+   * @tparam F endofunctor (type constructor of arity 1) of the category of Scala types
    * @tparam B carrier object of the algebra
    */
-  type GenericAlgebra[A, S[_], B] = A => S[B] => B
+  type GenericAlgebra[A, F[_], B] = A => F[B] => B
 
   /**
-   * A coalgebra for an F-algebra.
+   * A morphism for an F-coalgebra.
    *
-   * @tparam S branching constructor of the initial algebra
+   * @tparam F endofunctor (type constructor of arity 1) of the category of Scala types
    * @tparam B carrier object of the coalgebra
    */
-  type Coalgebra[S[_], B] = B => S[B]
+  type Coalgebra[F[_], B] = B => F[B]
 
   /**
-   * The fixpoint operator on functors.
+   * The least fixpoint operator on endofunctors in the category of Scala types.
+   * This is used to form the initial algebra (recursive type) for a given endofunctor.
    * Implemented as a partial application of Cofree to Unit.
    *
-   * @tparam S functor whose fixpoint we are forming
+   * @tparam F endofunctor whose least fixpoint we are forming
    */
-  type µ[S[+_]] = Cofree[S, Unit]
+  type µ[F[+_]] = Cofree[F, Unit]
 
-  type Mu[S[+_]] = µ[S]
+  type Mu[F[+_]] = µ[F]
 
   /**
-   * Constructor and deconstructor for instances of fixpoint types of branching functors.
+   * Constructor and deconstructor for instances of initial F-algebras.
    */
   object In {
 
     /**
      * Instance constructor.
      *
-     * @param value an instance of the branching functor
-     * @tparam S the branching functor
-     * @return the value wrapped as an instance of the fixpoint
+     * @tparam F endofunctor (type constructor of arity 1) of the category of Scala types
+     * @param value an instance of F applied to the initial algebra
+     * @return the resulting wrapped instance of the initial algebra for F
      */
-    def apply[S[+_]](value: S[µ[S]])(implicit S: Functor[S]): µ[S] = Cofree((), value)
+    def apply[F[+_]](value: F[µ[F]])(implicit F: Functor[F]): µ[F] = Cofree((), value)
 
     /**
      * Extractor for pattern matching.
      *
-     * @param node an instance of the fixpoint wrapped around an instance of the branching functor
-     * @tparam S the branching functor
-     * @return the instance of the branching functor
+     * @tparam F endofunctor (type constructor of arity 1) of the category of Scala types
+     * @param node an instance of the initial algebra for F
+     * @return the resulting unwrapped instance of F applied to the initial algebra
      */
-    def unapply[S[+_]](node: µ[S]): S[µ[S]] = node.tail
+    def unapply[F[+_]](node: µ[F]): F[µ[F]] = node.tail
   }
 
   /**
    * Wrapper to inject useful methods into Cofree
    * (similar to C# extension methods).
    *
-   * @tparam S branching functor of this collection
+   * @tparam F branching endofunctor of this collection
    * @tparam A generic item type of this collection
    */
-  implicit class CofreeOps[S[+_], +A](self: Cofree[S, A]) {
+  implicit class CofreeOps[F[+_], +A](self: Cofree[F, A]) {
 
     /**
      * Catamorphism (generalizeld fold) for Cofree.
@@ -81,7 +83,7 @@ package object scalak {
      * @tparam B result type of the catamorphism
      * @return the result of applying the g-based catamorphism to the root
      */
-    def cata[B](g: A => S[B] => B)(implicit S: Functor[S]): B =
+    def cata[B](g: A => F[B] => B)(implicit F: Functor[F]): B =
       g(self.head)(self.tail map { _ cata g })
     // TODO paramorphism
   }
@@ -89,20 +91,19 @@ package object scalak {
   /**
    * Wrapper to inject useful methods into µ.
    *
-   * @tparam S endofunctor for this fixpoint
+   * @tparam F endofunctor for this initial algebra
    */
-  implicit class MuOps[S[+_]](self: µ[S]) {
+  implicit class MuOps[F[+_]](self: µ[F]) {
 
     /**
      * Catamorphism (generalizeld fold) for µ.
-     * Note that this is the only other place with explicit recursion in this example.
      *
      * @param g function to apply to each node's value and partial results
      *          already computed for its children
      * @tparam B result type of the catamorphism
      * @return the result of applying the g-based catamorphism to the root
      */
-    def cata[B](g: S[B] => B)(implicit S: Functor[S]): B =
+    def cata[B](g: F[B] => B)(implicit F: Functor[F]): B =
       new CofreeOps(self) cata { _ => g }
     // TODO paramorphism
   }
