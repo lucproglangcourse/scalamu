@@ -11,22 +11,22 @@ import scalaz.syntax.id._      // provides |> (forward pipe like in F#)
 import scalak._                // algebra types and injected cata method
 
 /**
- * Endofunctor for (generic) F-algebra in the category Scala types.
- *
+ * Endofunctor for (generic) algebra in the category Scala types.
+ * {{{
  * data NodeF[+A] = P | OU(A*)
- *
+ * }}}
  * (This is largely equivalent to rose trees.)
  *
- * @tparam A carrier object of the F-algebra
+ * @tparam A argument of the endofunctor
  */
 sealed trait NodeF[+A]
 case object P extends NodeF[Nothing]
 case class OU[A](children: A*) extends NodeF[A]
 
 /**
- * Implicit value for declaring NodeF as a Functor in scalaz.
+ * Implicit value for declaring `NodeF` as a `Functor` in scalaz.
  */
-implicit val NodeFunctor: Functor[NodeF] = new Functor[NodeF] {
+implicit val NodeFunctor = new Functor[NodeF] {
   def map[A, B](fa: NodeF[A])(f: A => B): NodeF[B] = fa match {
     case P => P
     case OU(cs @ _*) => OU(cs map f: _*)
@@ -36,7 +36,12 @@ implicit val NodeFunctor: Functor[NodeF] = new Functor[NodeF] {
 // TODO NodeMonad
 
 /**
- * Fixed point of ExprF as carrier object for initial algebra.
+ * Least fixpoint of `NodeF` (recursive type based on `NodeF`)
+ * as generic carrier object for initial algebra.
+ * By contrast with the nongeneric examples, this requires
+ * the explicit use of `Cofree` as the container of item values.
+ *
+ * @tparam A generic item type of the resulting carrier object
  */
 type Node[+T] = Cofree[NodeF, T]
 
@@ -61,6 +66,10 @@ val org =
     )
   )
 
+
+
+
+
 org.map(_._1.length).head assert_=== 10
 
 def size[A]: GenericAlgebra[A, NodeF, Int] = _ => {
@@ -81,9 +90,17 @@ def incBy(perc: Float)(num: Int): Int = scala.math.round(num.toFloat * (100 + pe
 
 val orgAfterRaise = org map (incBy(2.5f) _).second
 
+
+
+
+
 orgAfterRaise.tail.asInstanceOf[OU[Node[(String, Int)]]].children(0).head._2 assert_=== 144
 
 val orgSanitized = orgAfterRaise map { _._1 }
+
+
+
+
 
 orgSanitized.head assert_=== "The Outfit"
 

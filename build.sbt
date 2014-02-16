@@ -1,6 +1,12 @@
+organization := "edu.luc.etl"
+
 name := "scalak"
 
-version := "0.0.3"
+version := "0.1.0"
+
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+
+seq(bintrayPublishSettings:_*)
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-language:higherKinds")
 

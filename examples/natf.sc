@@ -6,7 +6,8 @@ import scalaz.syntax.functor._ // for map
 import scalak._                // algebra types and injected cata method
 
 /*
- * In this example, we represent natural numbers as lists without item values:
+ * In this example, we represent natural numbers
+ * essentially as lists without item values:
  *
  * 0 = zero
  * 3 = succ(succ(succ(zero)))
@@ -16,19 +17,20 @@ import scalak._                // algebra types and injected cata method
 
 /**
  * Endofunctor for (non-generic) F-algebra in the category Scala types:
- *
+ * {{{
  * data NatF[+A] = Zero | Succ(n: A)
- *
- * @tparam A carrier object of the F-algebra
+ * }}}
+ * @tparam A argument (type parameter) of the endofunctor
  */
 sealed trait NatF[+A]
 case object Zero extends NatF[Nothing]
 case class Succ[A](n: A) extends NatF[A]
 
 /**
- * Implicit value for declaring NatF as a Functor in scalaz.
+ * Implicit value for declaring `NatF` as an instance of
+ * typeclass `Functor` in scalaz.
  */
-implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
+implicit val NatFunctor = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
     case Zero    => Zero
     case Succ(n) => Succ(f(n))
@@ -36,7 +38,7 @@ implicit val NatFunctor: Functor[NatF] = new Functor[NatF] {
 }
 
 /**
- * Fixed point of NatF (recursive type based on NatF)
+ * Least fixpoint of `NatF` (recursive type based on `NatF`)
  * as carrier object for initial algebra.
  */
 type Nat = µ[NatF]
@@ -53,7 +55,8 @@ val two   = succ(one)
 val three = succ(two)
 
 /**
- * Algebra for carrier object Int in category Scala types:
+ * Conversion to `Int` as an `NatF`-algebra
+ * for carrier object `Int` in the category Scala types.
  */
 def toInt: Algebra[NatF, Int] = {
   case Zero    => 0
@@ -65,8 +68,9 @@ zero  cata toInt assert_=== 0
 three cata toInt assert_=== 3
 
 /**
- * Coalgebra (generator for corecursion)
- * for carrier object Int in category Scala types.
+ * Conversion from `Int` as an `NatF`-coalgebra
+ * for carrier object `Int` in category Scala types
+ * (generator for corecursion).
  */
 def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
   require { n >= 0 }
@@ -86,10 +90,10 @@ def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
 µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
 /**
- * Addition as an algebra for plugging into cata.
+ * Addition as an `Option`-algebra
+ * for carrier object `Nat` in the category Scala types.
  *
- * @param m the starting point
- * @return the result of adding the receiver of cata to the starting point
+ * @param m the seed value (starting point for generating successive values)
  */
 def plus(m: Nat): Algebra[NatF, Nat] = {
   case Zero    => m

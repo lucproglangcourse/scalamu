@@ -7,7 +7,7 @@ import scalaz.syntax.functor._ // for map
 import scalak._                // algebra types and injected cata method
 
 
-// TODO parsing/unfold
+// TODO parsing as unfold
 
 /*
  * In this example, we represent arithmetic expressions as trees
@@ -15,9 +15,9 @@ import scalak._                // algebra types and injected cata method
  */
 
 /**
- * Endofunctor for (non-generic) F-algebra in the category Scala types:
+ * Endofunctor for (nongeneric) F-algebra in the category Scala types:
  *
- * @tparam A carrier object of the F-algebra
+ * @tparam A argument of the endofunctor
  */
 sealed trait ExprF[+A]
 case class Constant(value: Int)        extends ExprF[Nothing]
@@ -29,9 +29,10 @@ case class Div  [A](left: A, right: A) extends ExprF[A]
 case class Mod  [A](left: A, right: A) extends ExprF[A]
 
 /**
- * Implicit value for declaring ExprF as a Functor in scalaz.
+ * Implicit value for declaring `ExprF` as an instance of
+ * typeclass `Functor` in scalaz.
  */
-implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
+implicit val ExprFunctor = new Functor[ExprF] {
   def map[A, B](fa: ExprF[A])(f: A => B): ExprF[B] = fa match {
     case Constant(v) => Constant(v)
     case UMinus(r)   => UMinus(f(r))
@@ -44,7 +45,7 @@ implicit val ExprFunctor: Functor[ExprF] = new Functor[ExprF] {
 }
 
 /**
- * Fixpoint of ExprF as carrier object for initial algebra.
+ * Least fixpoint of `ExprF` as carrier object for the initial algebra.
  */
 type Expr = µ[ExprF]
 
@@ -97,7 +98,7 @@ object TestFixtures {
     )
 }
 
-// specific algebras: note nonrecursive nature
+// specific ExprF-algebras: note nonrecursive nature
 
 def evaluate: Algebra[ExprF, Int] = {
   case Constant(c) => c

@@ -2,16 +2,16 @@
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
 examples for exploring and teaching the software engineering
-benefits of defining algebraic data types as intial F-algebras.
+benefits of defining algebraic data types as initial F-algebras.
 
 # Getting Scalak
 
-We are working on the proper packaging.
 For now, please just clone this project and play around with it.
+We are working on the proper packaging.
 
 # Quick Start
 
-Natural numbers as the initial algebra of the `Option` endofunctor.
+Natural numbers as the initial algebra for the `Option` endofunctor.
 
     import scalaz._
     import Scalaz._
@@ -53,6 +53,22 @@ Addition as another catamorphism.
 
     two cata plus(three) cata toInt assert_=== 5
 
+# Guide to Example Worksheets
+
+We recommend looking at them in this order:
+
+1. `expressions`
+1. `natf`
+1. `natoption`
+1. `natHigherKinded`
+1. `mylist`
+1. `orgchart`
+
+# Glossary
+
+TODO
+
 # References
 
-[Understanding F-Algebras](https://www.fpcomplete.com/user/bartosz/understanding-algebras)
+- [Understanding F-Algebras](https://www.fpcomplete.com/user/bartosz/understanding-algebras)
+- [F-Algebras (Wikipedia)](http://en.wikipedia.org/wiki/F-algebra)

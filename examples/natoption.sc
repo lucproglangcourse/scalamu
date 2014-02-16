@@ -6,7 +6,8 @@ import scalaz.syntax.functor._ // for map
 import scalak._                // algebra types and injected cata method
 
 /*
- * In this example, we represent natural numbers as lists without item values:
+ * In this example, we represent natural numbers
+ * essentially as lists without item values:
  *
  * 0 = zero
  * 3 = succ(succ(succ(zero)))
@@ -15,12 +16,14 @@ import scalak._                // algebra types and injected cata method
  */
 
 /*
- * Endofunctor for (non-generic) F-algebra in the category Scala types:
- * we use the predefined Option[_] type constructor (functor)
+ * A (nongeneric) F-algebra in the category Scala types:
+ * we use the predefined Option[_] endofunctor
+ * (type constructor of arity 1). This is already defined
+ * as an instance of typeclass Functor in scalaz.
  */
 
 /**
- * Fixed point of NatF (recursive type based on NatF)
+ * Least fixpoint of `Option` (recursive type based on `Option`)
  * as carrier object for initial algebra.
  */
 type Nat = µ[Option]
@@ -37,7 +40,8 @@ val two   = succ(one)
 val three = succ(two)
 
 /**
- * Algebra for carrier object Int in category Scala types:
+ * Conversion to `Int` as an `Option`-algebra
+ * for carrier object `Int` in the category Scala types.
  */
 def toInt: Algebra[Option, Int] = {
   case None    => 0
@@ -50,8 +54,9 @@ zero  cata toInt assert_=== 0
 three cata toInt assert_=== 3
 
 /**
- * Coalgebra (generator for corecursion)
- * for carrier object Int in category Scala types.
+ * Conversion from `Int` as an `Option`-coalgebra
+ * for carrier object `Int` in category Scala types
+ * (generator for corecursion).
  */
 def fromInt: Coalgebra[Option, Int] = (n: Int) => {
   require { n >= 0 }
@@ -62,19 +67,15 @@ def fromInt: Coalgebra[Option, Int] = (n: Int) => {
 /*
  * Unfold is an anamorphism for unfolding a Nat from a coalgebra
  * such as fromInt. This is an example of corecursion.
- *
- * We need to convert the item values back to Unit before applying toInt
- * because Cofree is generic in the item type and preserves it.
- * To avoid this, we would need a non-generic version of Cofree.
  */
 µ.unfold(0)(fromInt) cata toInt assert_=== 0
 µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
 /**
- * Addition as an algebra for plugging into cata.
+ * Addition as an `Option`-algebra
+ * for carrier object `Nat` in the category Scala types.
  *
- * @param m the starting point
- * @return the result of adding the receiver of cata to the starting point
+ * @param m the seed value (starting point for generating successive values)
  */
 def plus(m: Nat): Algebra[Option, Nat] = {
   case None    => m
