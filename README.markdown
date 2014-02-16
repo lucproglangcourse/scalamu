@@ -4,7 +4,7 @@ Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
 examples for exploring and teaching the software engineering
 benefits of defining algebraic data types as initial F-algebras.
 
-# Getting Scalak
+# Getting scalak
 
 We are working on the proper publishing to Bintray's jcenter and
 possibly Maven Central.
@@ -18,7 +18,8 @@ Then add these lines to your `build.sbt`.
 
     libraryDependencies += "edu.luc.etl" %% "scalak" % "0.1.0"
 
-You can also just clone this project and play around with it.
+You can also just clone this project and play around with the example
+worksheets.
 
 # Quick Start
 
