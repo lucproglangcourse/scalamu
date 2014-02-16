@@ -6,8 +6,19 @@ benefits of defining algebraic data types as initial F-algebras.
 
 # Getting Scalak
 
-For now, please just clone this project and play around with it.
-We are working on the proper packaging.
+We are working on the proper publishing to Bintray's jcenter and
+possibly Maven Central.
+Meanwhile, you can resolve the dependency on scalak as follows.
+
+First, install the [Bintray sbt plugin](https://github.com/softprops/bintray-sbt).
+
+Then add these lines to your `build.sbt`.
+
+    resolvers += bintray.Opts.resolver.repo("laufer", "maven")
+
+    libraryDependencies += "edu.luc.etl" %% "scalak" % "0.1.0"
+
+You can also just clone this project and play around with it.
 
 # Quick Start
 
