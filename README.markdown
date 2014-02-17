@@ -1,14 +1,14 @@
-# Scala
+# Scalamu
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
 examples for exploring and teaching the software engineering
 benefits of defining algebraic data types as initial F-algebras.
 
-# Getting scalamu
+# Getting Scalamu
 
-We are working on the proper publishing to Bintray's jcenter and
+We are working on properly publishing Scalamu to Bintray's jcenter and
 possibly Maven Central.
-Meanwhile, you can resolve the dependency on scalamu as follows.
+Meanwhile, you can resolve the dependency on Scalamu as follows.
 
 First, install the [Bintray sbt plugin](https://github.com/softprops/bintray-sbt).
 
