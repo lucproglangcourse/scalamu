@@ -58,7 +58,7 @@ three cata toInt assert_=== 3
  * for carrier object `Int` in category Scala types
  * (generator for corecursion).
  */
-def fromInt: Coalgebra[Option, Int] = (n: Int) => {
+def fromInt: Coalgebra[Option, Int] = n => {
   require { n >= 0 }
   if   (n == 0) None
   else          Some(n - 1)
@@ -72,10 +72,10 @@ def fromInt: Coalgebra[Option, Int] = (n: Int) => {
 µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
 /**
- * Addition as an `Option`-algebra
- * for carrier object `Nat` in the category Scala types.
+ * Addition to a number `m` as an `Option`-algebra for carrier object
+ * `Nat` in the category Scala types.
  *
- * @param m the seed value (starting point for generating successive values)
+ * @param m the number to which we are adding the argument of the algebra
  */
 def plus(m: Nat): Algebra[Option, Nat] = {
   case None    => m
@@ -87,7 +87,47 @@ zero  cata plus(three) cata toInt assert_=== 3
 three cata plus(zero)  cata toInt assert_=== 3
 two   cata plus(three) cata toInt assert_=== 5
 
-println("■")
+/**
+ * Multiplication by a number `m` as an `Option`-algebra for carrier object
+ * `Nat` in the category Scala types.
+ *
+ * @param m the number to which we are adding the argument of the algebra
+ */
+def times(m: Nat): Algebra[Option, Nat] = {
+  case None    => zero
+  case Some(n) => n cata plus(m)
+}
 
-// TODO multiplication
-// TODO paramorphism/factorial
+zero  cata times(zero)  cata toInt assert_=== 0
+zero  cata times(three) cata toInt assert_=== 0
+three cata times(zero)  cata toInt assert_=== 0
+two   cata times(three) cata toInt assert_=== 6
+
+/**
+ * Argument function for `para`. Returns `one` when there is no accumulated
+ * result yet. Otherwise it multiplies the accumulated result by the current
+ * receiver value during traversal, whose tail (out) is passed as `curr` by
+ * `para`.
+ * By contrast, F-algebras do not have access to the current receiver value
+ * during traversal!
+ * Exercise: This has a similar type signature as `plus` and `times`. What
+ * are the key differences?
+ *
+ * @param curr the tail of the current receiver value
+ * @return the current receiver times the accumulated result
+ */
+def oneOrTimes(curr: Option[Nat]): Algebra[Option, Nat] = {
+  case None      => one
+  case Some(acc) => In(curr) cata times(acc)
+}
+
+oneOrTimes(Some(two))(None)        cata toInt assert_=== 1
+oneOrTimes(None)     (Some(three)) cata toInt assert_=== 0
+oneOrTimes(Some(one))(Some(two))   cata toInt assert_=== 4
+oneOrTimes(Some(two))(Some(three)) cata toInt assert_=== 9
+
+(0 to 5) zip Seq(1, 1, 2, 6, 24, 120) foreach { case (arg, result) =>
+  µ.unfold(arg)(fromInt) para oneOrTimes cata toInt assert_=== result
+}
+
+println("■")

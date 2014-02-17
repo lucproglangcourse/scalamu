@@ -87,18 +87,35 @@ package object scalak {
      * with carrier object `B`.
      * This recursively computes a result of type `B` from this
      * instance of `Cofree[F, A]`.
-     * Note that this is the only place with explicit recursion in this
-     * example.
      *
-     * @param f generic F-algebra to apply to the partial results
-     *          available for the children of this instance
+     * @param f generic F-algebra to apply to the head of this instance and
+     *          the partial results available for the children of this instance
      * @tparam B carrier object of `f` and result type of the catamorphism
      * @return the result of applying the catamorphism to this instance of
      *         `Cofree[F, A]`
      */
-    def cata[B](f: A => F[B] => B)(implicit F: Functor[F]): B =
-      f(self.head)(self.tail map { _ cata f })
-    // TODO paramorphism
+    def cata[B](f: A => F[B] => B)(implicit F: Functor[F]): B = {
+      para((a => _ => fb => f(a)(fb)): A => F[Cofree[F, A]] => F[B] => B)
+      // equivalent to f(self.head)(self.tail map { _ cata f })
+      // per definition of para below (f doesn't need the extra self.tail arg)
+    }
+
+    /**
+     * The paramorphism (generalizeld catamorphism) for the morphism `p`.
+     * This recursively computes a result of type `B` from this
+     * instance of `Cofree[F, A]` by applying p to the head and tail
+     * of this instance and the partial results available for the children.
+     * Note that this is the only place with explicit recursion in this
+     * example.
+     *
+     * @param p morphism to apply to the partial results
+     *          available for the children of this instance
+     * @tparam B carrier object of `f` and result type of the catamorphism
+     * @return the result of applying the paramorphism to this instance of
+     *         `Cofree[F, A]`
+     */
+    def para[B](p: A => F[Cofree[F, A]] => F[B] => B)(implicit F: Functor[F]): B =
+      p(self.head)(self.tail)(self.tail map { _ para p })
   }
 
   /**
@@ -121,8 +138,10 @@ package object scalak {
      * @return the result of applying `(| ϕ |)` to this instance of `µ[F]`
      */
     def cata[B](ϕ: F[B] => B)(implicit F: Functor[F]): B =
-      new CofreeOps(self) cata { _ => ϕ }
-    // TODO paramorphism
+      new CofreeOps(self) cata Function.const(ϕ)
+
+    def para[B](ψ: F[µ[F]] => F[B] => B)(implicit F: Functor[F]): B =
+      new CofreeOps(self) para Function.const(ψ)
   }
 
   /**

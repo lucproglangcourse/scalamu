@@ -84,3 +84,4 @@ TODO
 
 - [Understanding F-Algebras](https://www.fpcomplete.com/user/bartosz/understanding-algebras)
 - [F-Algebras (Wikipedia)](http://en.wikipedia.org/wiki/F-algebra)
+- [Haskell recursion patterns library reference](http://hackage.haskell.org/package/pointless-haskell-0.0.8/docs/Generics-Pointless-RecursionPatterns.html)

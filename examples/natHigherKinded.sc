@@ -21,12 +21,16 @@ import scalak._                // algebra types and injected cata method
  * @tparam F the endofunctor
  */
 trait FInitial[F[+_]] {
+
   /** The zero constructor. */
   val z: F[Nothing]
+
   /** The successor constructor. */
   def s[A]: A => F[A]
+
   /** The extractor. */
   def out[A]: F[A] => Option[A]
+
   /** The `Functor` typeclass instance. */
   implicit val FFunctor = new Functor[F] {
     def map[A, B](fa: F[A])(f: A => B): F[B] = out(fa) match {
@@ -114,4 +118,3 @@ test(NatCWrapper.C)
 test(OptionC)
 
 println("■")
-

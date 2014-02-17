@@ -90,10 +90,10 @@ def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
 µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
 /**
- * Addition as an `Option`-algebra
- * for carrier object `Nat` in the category Scala types.
+ * Addition to a number `m` as an `NatF`-algebra for carrier object
+ * `Nat` in the category Scala types.
  *
- * @param m the seed value (starting point for generating successive values)
+ * @param m the number to which we are adding the argument of the algebra
  */
 def plus(m: Nat): Algebra[NatF, Nat] = {
   case Zero    => m
@@ -106,6 +106,3 @@ three cata plus(zero)  cata toInt assert_=== 3
 two   cata plus(three) cata toInt assert_=== 5
 
 println("■")
-
-// TODO multiplication
-// TODO paramorphism/factorial

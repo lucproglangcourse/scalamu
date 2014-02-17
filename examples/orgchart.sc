@@ -19,8 +19,8 @@ import scalak._                // algebra types and injected cata method
  *
  * @tparam A argument of the endofunctor
  */
-sealed trait NodeF[+A]
-case object P extends NodeF[Nothing]
+sealed trait NodeF[+A] { def children: Seq[A] }
+case object P extends NodeF[Nothing] { val children = Seq.empty }
 case class OU[A](children: A*) extends NodeF[A]
 
 /**
@@ -33,7 +33,7 @@ implicit val NodeFunctor = new Functor[NodeF] {
   }
 }
 
-// TODO NodeMonad
+// TODO NodeMonad/flatMap
 
 /**
  * Least fixpoint of `NodeF` (recursive type based on `NodeF`)
@@ -66,10 +66,6 @@ val org =
     )
   )
 
-
-
-
-
 org.map(_._1.length).head assert_=== 10
 
 def size[A]: GenericAlgebra[A, NodeF, Int] = _ => {
@@ -89,19 +85,9 @@ org cata depth assert_=== 3
 def incBy(perc: Float)(num: Int): Int = scala.math.round(num.toFloat * (100 + perc) / 100)
 
 val orgAfterRaise = org map (incBy(2.5f) _).second
-
-
-
-
-
-orgAfterRaise.tail.asInstanceOf[OU[Node[(String, Int)]]].children(0).head._2 assert_=== 144
+orgAfterRaise.tail.children(0).head._2 assert_=== 144
 
 val orgSanitized = orgAfterRaise map { _._1 }
-
-
-
-
-
 orgSanitized.head assert_=== "The Outfit"
 
 // TODO scalak lenses to give raise to single person
