@@ -16,7 +16,7 @@ Then add these lines to your `build.sbt`.
 
     resolvers += bintray.Opts.resolver.repo("laufer", "maven")
 
-    libraryDependencies += "edu.luc.etl" %% "scalak" % "0.1.0"
+    libraryDependencies += "edu.luc.etl" %% "scalak" % "0.1.1"
 
 You can also just clone this project and play around with the example
 worksheets.
