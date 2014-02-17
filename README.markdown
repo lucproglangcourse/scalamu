@@ -1,14 +1,14 @@
-# Scalak
+# Scala
 
 Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
 examples for exploring and teaching the software engineering
 benefits of defining algebraic data types as initial F-algebras.
 
-# Getting scalak
+# Getting scalamu
 
 We are working on the proper publishing to Bintray's jcenter and
 possibly Maven Central.
-Meanwhile, you can resolve the dependency on scalak as follows.
+Meanwhile, you can resolve the dependency on scalamu as follows.
 
 First, install the [Bintray sbt plugin](https://github.com/softprops/bintray-sbt).
 
@@ -16,7 +16,7 @@ Then add these lines to your `build.sbt`.
 
     resolvers += bintray.Opts.resolver.repo("laufer", "maven")
 
-    libraryDependencies += "edu.luc.etl" %% "scalak" % "0.1.1"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.1.1"
 
 You can also just clone this project and play around with the example
 worksheets.
@@ -27,7 +27,7 @@ Natural numbers as the initial algebra for the `Option` endofunctor.
 
     import scalaz._
     import Scalaz._
-    import scalak._
+    import scalamu._
 
     type Nat = µ[Option]
 
