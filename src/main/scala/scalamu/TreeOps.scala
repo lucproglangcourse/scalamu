@@ -1,4 +1,4 @@
-package scalak
+package scalamu
 
 import scalaz.Tree
 import scalaz.std.stream._

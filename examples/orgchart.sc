@@ -8,7 +8,7 @@ import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 import scalaz.syntax.id._      // provides |> (forward pipe like in F#)
 
-import scalak._                // algebra types and injected cata method
+import scalamu._                // algebra types and injected cata method
 
 /**
  * Endofunctor for (generic) algebra in the category Scala types.
@@ -90,6 +90,6 @@ orgAfterRaise.tail.children(0).head._2 assert_=== 144
 val orgSanitized = orgAfterRaise map { _._1 }
 orgSanitized.head assert_=== "The Outfit"
 
-// TODO scalak lenses to give raise to single person
+// TODO scalamu lenses to give raise to single person
 
 println("■")

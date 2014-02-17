@@ -2,7 +2,7 @@ import scalaz.Cofree
 import scalaz.Functor
 import scalaz.syntax.functor._
 
-package object scalak {
+package object scalamu {
 
   /**
    * A (nongeneric) F-algebra with carrier object `B`.
