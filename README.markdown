@@ -6,15 +6,16 @@ benefits of defining algebraic data types as initial F-algebras.
 
 # Getting Scalaµ
 
-We are working on properly publishing Scalaµ to Bintray's jcenter and
-possibly Maven Central.
+We are working on properly syncing Scalaµ from Bintray's jcenter to
+Maven Central.
+
 Meanwhile, you can resolve the dependency on Scalaµ as follows.
 
 First, install the [Bintray sbt plugin](https://github.com/softprops/bintray-sbt).
 
 Then add these lines to your `build.sbt`.
 
-    resolvers += bintray.Opts.resolver.repo("laufer", "maven")
+    seq(bintrayResolverSettings:_*)
 
     libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.1.1"
 
