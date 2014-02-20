@@ -15,7 +15,10 @@ import scalamu._                // algebra types and injected cata method
  */
 
 /**
- * Endofunctor for (nongeneric) F-algebra in the category Scala types:
+ * Endofunctor for (nongeneric) F-algebra in the category Scala types.
+ * Note that `A` is not a generic item type of the resulting algebraic
+ * data type. As can be seen below, once we form `Expr` as the least
+ * fixpoint of `ExprF`, `A` will go away.
  *
  * @tparam A argument of the endofunctor
  */
