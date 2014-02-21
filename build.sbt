@@ -2,7 +2,7 @@ organization := "edu.luc.etl"
 
 name := "scalamu"
 
-version := "0.1.1"
+version := "0.1.2"
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 

@@ -59,7 +59,7 @@ package object scalamu {
      *              that is, `F[µ[F]]`
      * @return the resulting wrapped instance of `µ[F]`
      */
-    def apply[F[+_]](value: F[µ[F]])(implicit F: Functor[F]): µ[F] = Cofree((), value)
+    def apply[F[+_]: Functor](value: F[µ[F]]): µ[F] = Cofree((), value)
 
     /**
      * Extractor for pattern matching.
@@ -80,7 +80,7 @@ package object scalamu {
    * @tparam F branching endofunctor of this stream
    * @tparam A generic item type of this stream
    */
-  implicit class CofreeOps[F[+_], +A](self: Cofree[F, A]) {
+  implicit class CofreeOps[F[+_]: Functor, +A](self: Cofree[F, A]) {
 
     /**
      * The catamorphism (generalizeld fold) for the generic F-algebra `f`
@@ -94,7 +94,7 @@ package object scalamu {
      * @return the result of applying the catamorphism to this instance of
      *         `Cofree[F, A]`
      */
-    def cata[B](f: A => F[B] => B)(implicit F: Functor[F]): B = {
+    def cata[B](f: A => F[B] => B): B = {
       para((a => _ => fb => f(a)(fb)): A => F[Cofree[F, A]] => F[B] => B)
       // equivalent to f(self.head)(self.tail map { _ cata f })
       // per definition of para below (f doesn't need the extra self.tail arg)
@@ -114,7 +114,7 @@ package object scalamu {
      * @return the result of applying the paramorphism to this instance of
      *         `Cofree[F, A]`
      */
-    def para[B](p: A => F[Cofree[F, A]] => F[B] => B)(implicit F: Functor[F]): B =
+    def para[B](p: A => F[Cofree[F, A]] => F[B] => B): B =
       p(self.head)(self.tail)(self.tail map { _ para p })
   }
 
@@ -124,7 +124,7 @@ package object scalamu {
    * @tparam F endofunctor (type constructor of arity 1)
    *           of the category Scala types
    */
-  implicit class MuOps[F[+_]](self: µ[F]) {
+  implicit class MuOps[F[+_]: Functor](self: µ[F]) {
 
     /**
      * The catamorphism (generalizeld fold) for the F-algebra `ϕ`
@@ -137,10 +137,10 @@ package object scalamu {
      * @tparam B carrier object of `ϕ` and result type of the catamorphism
      * @return the result of applying `(| ϕ |)` to this instance of `µ[F]`
      */
-    def cata[B](ϕ: F[B] => B)(implicit F: Functor[F]): B =
+    def cata[B](ϕ: F[B] => B): B =
       new CofreeOps(self) cata Function.const(ϕ)
 
-    def para[B](ψ: F[µ[F]] => F[B] => B)(implicit F: Functor[F]): B =
+    def para[B](ψ: F[µ[F]] => F[B] => B): B =
       new CofreeOps(self) para Function.const(ψ)
   }
 
@@ -162,7 +162,7 @@ package object scalamu {
      * @tparam B carrier object of `g`
      * @param s seed value (starting point) for generating successive values
      */
-    def unfold[F[+_], B](s: B)(g: B => F[B])(implicit F: Functor[F]): µ[F] =
+    def unfold[F[+_]: Functor, B](s: B)(g: B => F[B]): µ[F] =
       Cofree.unfoldC(s)(g) map Function.const()
   }
 
