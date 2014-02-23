@@ -1,5 +1,5 @@
 /**
- * Small extensions to scalaz and for working with F-algebras.
+ * Small extensions to scalaz for working with F-algebras.
  */
 package object scalamu
     extends ToMuOps with ToCofreeCataOps with ToTreeCataOps {
