@@ -4,7 +4,7 @@ import scalaz.std.option._     // for Option as Functor instance
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
 
-import scalamu._                // algebra types and injected cata method
+import scalamu._               // algebra types and injected cata method
 
 
 // TODO parsing as unfold

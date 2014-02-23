@@ -16,7 +16,10 @@ libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.11.1" % "test"
 )
 
+apiURL := Some(url("http://lucproglangcourse.bitbucket.org/scalamu/doc/"))
+
 initialCommands in console := """
                                 |import scalaz._
                                 |import Scalaz._
+                                |import scalamu._
                                 |""".stripMargin

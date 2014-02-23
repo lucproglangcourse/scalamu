@@ -17,7 +17,7 @@ Then add these lines to your `build.sbt`.
 
     seq(bintrayResolverSettings:_*)
 
-    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.1.2"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.0"
 
 You can also just clone this project and play around with the example
 worksheets.
@@ -65,6 +65,10 @@ Addition as another catamorphism.
     }
 
     two cata plus(three) cata toInt assert_=== 5
+
+# API Documentation
+
+Available [here](http://lucproglangcourse.bitbucket.org/scalamu/doc/#scalamu.package).
 
 # Guide to Example Worksheets
 

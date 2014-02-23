@@ -6,9 +6,8 @@ import scalaz.std.function._   // provides standard instances of common function
 import scalaz.syntax.arrow._   // provides arrow operators used below
 import scalaz.syntax.equal._   // for assert_===
 import scalaz.syntax.functor._ // for map
-import scalaz.syntax.id._      // provides |> (forward pipe like in F#)
 
-import scalamu._                // algebra types and injected cata method
+import scalamu._               // algebra types and injected cata method
 
 /**
  * Endofunctor for (generic) algebra in the category Scala types.
