@@ -5,7 +5,8 @@ import scalaz.std.stream._
 import scalaz.syntax.Ops
 
 /**
- * Wraps a value `self` and provides additional methods related to `Tree`.
+ * Wraps a value `self` and provides catamorphism and related recursion
+ * patterns for injection into `Tree`.
  *
  * @tparam A generic item type of this tree
  */

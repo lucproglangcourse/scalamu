@@ -44,12 +44,12 @@ package object scalamu
   type µ[F[+_]] = scalaz.Cofree[F, Unit]
 
   /**
-   * Alias for Mu.
+   * Alias for `µ`.
    */
   type Mu[F[+_]] = µ[F]
 
   /**
-   * Alias for In.
+   * Alias for `In`.
    */
   val µ = In
 }
