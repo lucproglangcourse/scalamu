@@ -1,8 +1,7 @@
-import scalaz.{ Cofree, Equal, Functor }
+import scalaz.Cofree
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.option._     // for Option as Functor instance
 import scalaz.syntax.equal._   // for assert_===
-import scalaz.syntax.functor._ // for map
 
 import scalamu._               // algebra types and injected cata method
 
@@ -55,7 +54,7 @@ list3 cata length assert_=== 3
  * Nongeneric `Option`-algebra for carrier object `Int`
  * but specific item type, also `Int`.
  */
-def sum: GenericAlgebra[Int, Option, Int] = v => {
+val sum: GenericAlgebra[Int, Option, Int] = v => {
   case None    => 0      // end of list:  0
   case Some(n) => v + n  // regular node: add value to sum accumulated so far
 }

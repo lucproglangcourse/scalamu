@@ -1,7 +1,6 @@
-import scalaz.{ Cofree, Equal, Functor }
+import scalaz.Functor
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.syntax.equal._   // for assert_===
-import scalaz.syntax.functor._ // for map
 
 import scalamu._                // algebra types and injected cata method
 
@@ -65,7 +64,7 @@ def test[F[+_]](fi: FInitial[F]) = {
   zero  cata toInt assert_=== 0
   three cata toInt assert_=== 3
 
-  def fromInt: Coalgebra[F, Int] = (n: Int) => {
+  val fromInt: Coalgebra[F, Int] = (n: Int) => {
     require { n >= 0 }
     if   (n == 0) z
     else          s(n - 1)

@@ -70,11 +70,14 @@ Addition as another catamorphism.
 
 Available [here](http://lucproglangcourse.bitbucket.org/scalamu/doc/#scalamu.package).
 
-# Guide to Example Worksheets
+# Guide to Examples
 
-We recommend looking at them in this order:
+We recommend starting with
+[this standalone example](https://bitbucket.org/lucproglangcourse/expressions-algebraic-scala)
+of arithmetic expressions.
 
-1. `expressions`
+We then recommend looking at the example worksheets in this order:
+
 1. `natf`
 1. `natoption`
 1. `natHigherKinded`
@@ -84,7 +87,7 @@ We recommend looking at them in this order:
 To run an example worksheet:
 
     $ sbt console
-    :load examples/expressions.sc
+    :load examples/natf.sc
 
 # Glossary
 

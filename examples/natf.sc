@@ -1,7 +1,6 @@
-import scalaz.{ Cofree, Equal, Functor }
+import scalaz.Functor
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.syntax.equal._   // for assert_===
-import scalaz.syntax.functor._ // for map
 
 import scalamu._                // algebra types and injected cata method
 
@@ -58,7 +57,7 @@ val three = succ(two)
  * Conversion to `Int` as an `NatF`-algebra
  * for carrier object `Int` in the category Scala types.
  */
-def toInt: Algebra[NatF, Int] = {
+val toInt: Algebra[NatF, Int] = {
   case Zero    => 0
   case Succ(n) => n + 1
 }
@@ -72,7 +71,7 @@ three cata toInt assert_=== 3
  * for carrier object `Int` in category Scala types
  * (generator for corecursion).
  */
-def fromInt: Coalgebra[NatF, Int] = (n: Int) => {
+val fromInt: Coalgebra[NatF, Int] = (n: Int) => {
   require { n >= 0 }
   if   (n == 0) Zero
   else          Succ(n - 1)

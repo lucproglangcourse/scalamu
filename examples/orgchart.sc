@@ -1,11 +1,9 @@
-import scalaz.{ Cofree, Equal, Functor, Monad }
+import scalaz.{ Cofree, Functor }
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.string._     // for assert_=== to work on strings
-import scalaz.std.tuple._      // provides standard instances of tuple types
 import scalaz.std.function._   // provides standard instances of common function types
 import scalaz.syntax.arrow._   // provides arrow operators used below
 import scalaz.syntax.equal._   // for assert_===
-import scalaz.syntax.functor._ // for map
 
 import scalamu._               // algebra types and injected cata method
 

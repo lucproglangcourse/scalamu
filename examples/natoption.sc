@@ -1,8 +1,7 @@
-import scalaz.{ Cofree, Equal, Functor }
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.std.option._     // for Option as Functor instance
 import scalaz.syntax.equal._   // for assert_===
-import scalaz.syntax.functor._ // for map
+
 import scalamu._                // algebra types and injected cata method
 
 /*
@@ -43,7 +42,7 @@ val three = succ(two)
  * Conversion to `Int` as an `Option`-algebra
  * for carrier object `Int` in the category Scala types.
  */
-def toInt: Algebra[Option, Int] = {
+val toInt: Algebra[Option, Int] = {
   case None    => 0
   case Some(n) => n + 1
 }
@@ -58,7 +57,7 @@ three cata toInt assert_=== 3
  * for carrier object `Int` in category Scala types
  * (generator for corecursion).
  */
-def fromInt: Coalgebra[Option, Int] = n => {
+val fromInt: Coalgebra[Option, Int] = n => {
   require { n >= 0 }
   if   (n == 0) None
   else          Some(n - 1)
