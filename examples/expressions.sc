@@ -143,9 +143,4 @@ def depth: Algebra[ExprF, Int]= {
 TestFixtures.complex1 cata depth assert_=== 4
 TestFixtures.complex2 cata depth assert_=== 5
 
-def fromPrefixString: Coalgebra[ExprF, String] = (s: String) => {
-  Constant(0)
-  // TODO
-}
-
 println("■")
