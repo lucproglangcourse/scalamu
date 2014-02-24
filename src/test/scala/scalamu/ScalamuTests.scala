@@ -25,7 +25,7 @@ class ScalamuTests extends FunSuite {
   }
 
   test("Simple catamorphisms should work") {
-    assert({ zero cata toInt } == 0)
-    assert({ three cata toInt } == 3)
+    assert { (zero cata toInt) == 0 }
+    assert { (three cata toInt) == 3 }
   }
 }

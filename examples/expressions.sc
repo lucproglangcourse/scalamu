@@ -7,7 +7,8 @@ import scalaz.syntax.functor._ // for map
 import scalamu._               // algebra types and injected cata method
 
 
-// TODO parsing as unfold
+// TODO parsing as unfold (prefix or postfix notation)
+// TODO unparsing/printing
 
 /*
  * In this example, we represent arithmetic expressions as trees
@@ -141,5 +142,10 @@ def depth: Algebra[ExprF, Int]= {
 
 TestFixtures.complex1 cata depth assert_=== 4
 TestFixtures.complex2 cata depth assert_=== 5
+
+def fromPrefixString: Coalgebra[ExprF, String] = (s: String) => {
+  Constant(0)
+  // TODO
+}
 
 println("■")

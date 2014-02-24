@@ -81,6 +81,11 @@ We recommend looking at them in this order:
 1. `mylist`
 1. `orgchart`
 
+To run an example worksheet:
+
+    $ sbt console
+    :load examples/expressions.sc
+
 # Glossary
 
 TODO
