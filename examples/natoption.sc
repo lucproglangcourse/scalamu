@@ -17,7 +17,8 @@ import scalamu._                // algebra types and injected cata method
 /*
  * A (nongeneric) F-algebra in the category Scala types:
  * we use the predefined Option[_] endofunctor
- * (type constructor of arity 1). This is already defined
+ * of the category Scala types (type constructor of arity 1 with a `map`
+ * function that obeys certain laws). This is already defined
  * as an instance of typeclass Functor in scalaz.
  */
 

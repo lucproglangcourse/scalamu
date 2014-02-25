@@ -7,8 +7,9 @@ import scalaz.syntax.Ops
  * Wraps a value `self` and provides catamorphism and related recursion
  * patterns for injection into initial F-algebras based on `µ`.
  *
- * @tparam F endofunctor (type constructor of arity 1)
- *           of the category Scala types for this structure
+ * @tparam F endofunctor of the category Scala types for this structure
+ *           (type constructor of arity 1 with a `map` function that obeys
+ *           certain laws).
  */
 trait MuOps[F[+_]] extends Ops[µ[F]] {
 

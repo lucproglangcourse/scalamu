@@ -4,8 +4,10 @@ import scalaz.Cofree
 import scalaz.Functor
 
 /**
- * Object to hold the initial F-algebra.
- * This also serves as a companion to type constructor µ.
+ * Object to hold the initial F-algebra, where `F` is an endofunctor
+ * of the category Scala types (type constructor of arity 1 with a `map`
+ * function that obeys certain laws).
+ * This also serves as a companion to the fixpoint type constructor µ.
  */
 object In {
 
@@ -13,7 +15,7 @@ object In {
    * The initial F-algebra: an F-algebra with `µ[F]`,
    * the least fixpoint of `F`, as the carrier object.
    *
-   * @tparam F endofunctor (type constructor of arity 1) of the category Scala types
+   * @tparam F endofunctor of the category Scala types
    * @param value an unwrapped instance of `F` applied to `µ[F]`,
    *              that is, `F[µ[F]]`
    * @return the resulting wrapped instance of `µ[F]`
@@ -23,8 +25,7 @@ object In {
   /**
    * Extractor from initial F-algebra.
    *
-   * @tparam F endofunctor (type constructor of arity 1)
-   *           of the category Scala types
+   * @tparam F endofunctor of the category Scala types
    * @param wrapped a wrapped instance of `µ[F]`
    * @return the resulting unwrapped instance of `F[µ[F]]`
    */
@@ -39,8 +40,7 @@ object In {
    * generate successive values of type `F[B]`.
    * Anamorphisms are the categorical dual of catamorphisms.
    *
-   * @tparam F endofunctor (type constructor of arity 1)
-   *           of the category Scala types
+   * @tparam F endofunctor of the category Scala types
    * @param g F-coalgebra for generating successive values of type `F[B]`
    * @tparam B carrier object of `g`
    * @param s seed value (starting point) for generating successive values

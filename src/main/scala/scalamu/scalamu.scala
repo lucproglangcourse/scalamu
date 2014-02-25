@@ -1,5 +1,7 @@
 /**
- * Small extensions to scalaz for working with F-algebras.
+ * Small extensions to scalaz for working with F-algebras, where `F` is an
+ * endofunctor of the category Scala types (type constructor of arity 1
+ * with a `map` function that obeys certain laws).
  */
 package object scalamu
     extends ToMuOps with ToCofreeCataOps with ToTreeCataOps {
@@ -7,8 +9,7 @@ package object scalamu
   /**
    * A (nongeneric) F-algebra with carrier object `B`.
    *
-   * @tparam F an endofunctor (type constructor of arity 1)
-   *           of the category Scala types
+   * @tparam F an endofunctor of the category Scala types
    * @tparam B a carrier object (Scala type)
    */
   type Algebra[F[_], B] = F[B] => B
@@ -18,8 +19,7 @@ package object scalamu
    *
    * @tparam A the generic type parameter of the F-algebra
    *           (instances of `A` held by instances of `Cofree`)
-   * @tparam F an endofunctor (type constructor of arity 1)
-   *           of the category Scala types
+   * @tparam F an endofunctor of the category Scala types
    * @tparam B a carrier object (Scala type)
    */
   type GenericAlgebra[A, F[_], B] = A => F[B] => B
@@ -27,8 +27,7 @@ package object scalamu
   /**
    * A (nongeneric) F-coalgebra with carrier object `B`.
    *
-   * @tparam F an endofunctor (type constructor of arity 1)
-   *           of the category Scala types
+   * @tparam F an endofunctor of the category Scala types
    * @tparam B a carrier object (Scala type)
    */
   type Coalgebra[F[_], B] = B => F[B]
