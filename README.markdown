@@ -17,7 +17,7 @@ Then add these lines to your `build.sbt`.
 
     seq(bintrayResolverSettings:_*)
 
-    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.0"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.1"
 
 You can also just clone this project and play around with the example
 worksheets.
