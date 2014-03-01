@@ -1,3 +1,5 @@
+import scalaz.{ Show, Equal }
+
 /**
  * Small extensions to scalaz for working with F-algebras, where `F` is an
  * endofunctor of the category Scala types (type constructor of arity 1
@@ -51,4 +53,18 @@ package object scalamu
    * Alias for `In`.
    */
   val µ = In
+
+  /**
+   * Implicit value for declaring `µ` as an instance of
+   * typeclass `Equal` in scalaz using `Equal`'s structural equality.
+   * This enables `===` and `assert_===` on `µ` instances.
+   */
+  implicit def MuEqual[F[+_]]: Equal[µ[F]] = Equal.equalA
+
+  /**
+   * Implicit value for declaring `µ` as an instance of
+   * typeclass `Equal` in scalaz using `Equal`'s structural equality.
+   * This enables `===` and `assert_===` on `µ` instances.
+   */
+  implicit def MuShow[F[+_]]: Show[µ[F]] = Show.showFromToString
 }

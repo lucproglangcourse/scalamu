@@ -1,4 +1,4 @@
-import scalaz.Functor
+import scalaz.{ Equal, Functor, Show }
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
 import scalaz.syntax.equal._   // for assert_===
 
@@ -29,12 +29,18 @@ case class Succ[A](n: A) extends NatF[A]
  * Implicit value for declaring `NatF` as an instance of
  * typeclass `Functor` in scalaz.
  */
-implicit val NatFunctor = new Functor[NatF] {
+implicit val NatFFunctor = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
     case Zero    => Zero
     case Succ(n) => Succ(f(n))
   }
 }
+
+/** Declaration of `NatF` as an instance of `Equal`. */
+implicit def NatFEqual[A]: Equal[NatF[A]] = Equal.equalA
+
+/** Declaration of `NatF` as an instance of `Equal`. */
+implicit def NatFShow[A]: Show[NatF[A]] = Show.showFromToString
 
 /**
  * Least fixpoint of `NatF` (recursive type based on `NatF`)
@@ -103,5 +109,26 @@ zero  cata plus(zero)  cata toInt assert_=== 0
 zero  cata plus(three) cata toInt assert_=== 3
 three cata plus(zero)  cata toInt assert_=== 3
 two   cata plus(three) cata toInt assert_=== 5
+
+// structural equality should now work
+(Zero: NatF[Nothing]) assert_=== (Zero: NatF[Nothing])
+(Succ(Zero): NatF[Unit]) assert_=== (Succ(Zero): NatF[Unit])
+zero assert_=== zero
+three assert_=== three
+
+// imports required for checking equality and functor laws
+// using Scalaz's ScalaCheck bindings
+import scalaz.syntax.functor._
+import scalaz.scalacheck.ScalazArbitrary._
+import scalaz.scalacheck.ScalaCheckBinding._
+import scalaz.scalacheck.ScalazProperties._
+import org.scalacheck.Arbitrary
+
+implicit def NatFArbitrary[A](implicit a: Arbitrary[A]): Arbitrary[NatF[A]] =
+  a map { a => (Succ(a): NatF[A]) }
+
+// the equality and functor laws should both hold
+equal.laws[NatF[Int]].check
+functor.laws[NatF].check
 
 println("■")
