@@ -1,6 +1,6 @@
 # Scalaµ
 
-Small extensions to [scalaz](http://github.com/scalaz/scalaz) and
+Small extensions to [Scalaz](http://github.com/scalaz/scalaz) and
 examples for exploring and teaching the software engineering
 benefits of defining algebraic data types as initial F-algebras.
 
