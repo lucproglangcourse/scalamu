@@ -31,7 +31,7 @@ trait TreeCataOps[A] extends Ops[Tree[A]] {
    *
    * @param p morphism to apply to the partial results
    *          available for the children of this instance
-   * @tparam B carrier object of `f` and result type of the paramorphism
+   * @tparam B carrier object of `p` and result type of the paramorphism
    * @return the result of applying the paramorphism to this tree
    */
   def para[B](p: A => Stream[Tree[A]] => Stream[B] => B): B =
