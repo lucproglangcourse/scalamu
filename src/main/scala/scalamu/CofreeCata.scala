@@ -30,11 +30,10 @@ trait CofreeCataOps[F[+_], A] extends Ops[Cofree[F, A]] {
    * @return the result of applying the catamorphism to this instance of
    *         `Cofree[F, A]`
    */
-  def cata[B](f: A => F[B] => B): B = {
+  def cata[B](f: A => F[B] => B): B =
     para((a => _ => fb => f(a)(fb)): A => F[Cofree[F, A]] => F[B] => B)
     // equivalent to f(self.head)(self.tail map { _ cata f })
     // per definition of para below (f doesn't need the extra self.tail arg)
-  }
 
   /**
    * The paramorphism (generalized catamorphism) for the morphism `p`.

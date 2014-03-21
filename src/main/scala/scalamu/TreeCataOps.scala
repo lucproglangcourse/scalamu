@@ -17,12 +17,14 @@ trait TreeCataOps[A] extends Ops[Tree[A]] {
   /**
    * The catamorphism (generalized tree fold) for a generic F-algebra.
    *
-   * @param g generic F-algebra to apply to this tree
+   * @param f generic F-algebra to apply to this tree
    * @tparam B carrier object of `f` and result type of the catamorphism
    * @return the result of applying the catamorphism to this tree
    */
-  def cata[B](g: A => Stream[B] => B): B =
-    g(self.rootLabel)(self.subForest map { _ cata g })
+  def cata[B](f: A => Stream[B] => B): B =
+    para((a => _ => fb => f(a)(fb)): A => Stream[Tree[A]] => Stream[B] => B)
+  // equivalent to f(self.rootLabel)(self.subForest map { _ cata f })
+  // per definition of para below (f doesn't need the extra self.tail arg)
 
   /**
    * The paramorphism (generalized catamorphism) for a generic morphism.
