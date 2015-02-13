@@ -4,8 +4,9 @@
 # Scalaµ
 
 Small extensions to [Scalaz](http://github.com/scalaz/scalaz) and
-examples for exploring and teaching the software engineering
-benefits of defining algebraic data types as initial F-algebras.
+examples for exploring and [teaching](lucproglangcourse.github.io)
+the software engineering benefits of defining algebraic data types
+as initial F-algebras.
 
 # Getting Scalaµ
 
@@ -88,6 +89,9 @@ To run an example worksheet:
 
     $ sbt console
     :load examples/natf.sc
+
+[Here is a more advanced example](https://github.com/LoyolaChicagoCode/simpleimperative-algebraic-scala)
+of a simple imperative language interpreter implemented using Scalaµ.
 
 # Glossary
 
