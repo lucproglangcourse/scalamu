@@ -17,7 +17,9 @@ libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-scalacheck-binding" % "7.0.5" % "test"
 )
 
-apiURL := Some(url("http://lucproglangcourse.bitbucket.org/scalamu/doc/"))
+autoAPIMappings := true
+
+apiURL := Some(url("http://loyolachicagocode.github.io/scalamu/doc"))
 
 initialCommands in console := """
                                 |import scalaz._

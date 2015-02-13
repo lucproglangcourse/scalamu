@@ -65,12 +65,12 @@ Addition as another catamorphism.
 
 # API Documentation
 
-Available [here](http://lucproglangcourse.bitbucket.org/scalamu/doc/#scalamu.package).
+Available [here](http://loyolachicagocode.github.io/scalamu/doc/#scalamu.package).
 
 # Guide to Examples
 
 We recommend starting with
-[this standalone example](https://bitbucket.org/lucproglangcourse/expressions-algebraic-scala)
+[this standalone example](https://github.com/LoyolaChicagoCode/expressions-algebraic-scala)
 of arithmetic expressions.
 
 We then recommend looking at the example worksheets in this order:
