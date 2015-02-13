@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/LoyolaChicagoCode/scalamu.svg)](https://travis-ci.org/LoyolaChicagoCode/scalamu)
+[![Coverage Status](https://coveralls.io/repos/LoyolaChicagoCode/scalamu/badge.svg?branch=master)](https://coveralls.io/r/LoyolaChicagoCode/scalamu?branch=master)
+
 # Scalaµ
 
 Small extensions to [Scalaz](http://github.com/scalaz/scalaz) and
