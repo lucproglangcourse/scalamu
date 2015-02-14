@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.org/LoyolaChicagoCode/scalamu.svg)](https://travis-ci.org/LoyolaChicagoCode/scalamu)
 [![Coverage Status](https://coveralls.io/repos/LoyolaChicagoCode/scalamu/badge.svg?branch=master)](https://coveralls.io/r/LoyolaChicagoCode/scalamu?branch=master)
 [![Codacy Badge](https://www.codacy.com/project/badge/8996f07e06ad46019b85c351db66df77)](https://www.codacy.com/public/laufer/scalamu)
+
+[![Issue Stats](http://issuestats.com/github/LoyolaChicagoCode/scalamu/badge/pr)](http://issuestats.com/github/LoyolaChicagoCode/scalamu)
 [![Issue Stats](http://issuestats.com/github/LoyolaChicagoCode/scalamu/badge/issue)](http://issuestats.com/github/LoyolaChicagoCode/scalamu)
+
 
 # Scalaµ
 
