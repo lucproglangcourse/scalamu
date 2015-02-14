@@ -1,6 +1,4 @@
 language: scala
 scala: 2.10.4 2.11.4
 script: sbt coverage test
-after_success: sbt coverageReport codacyCoverage
-global:
-  secure: DUVhhnjf+CWssDZnBdQ2PJ0k/fnQPgLUSaFhfvkstJjF5wCrIX5fqgPFMXH5ODC3gAxkZDtHCjZUSpt4QBwaCILhIzDz7sDSzXFnzhL9cfNoErwvNdLhxVBlBLAWuGzelvbqyxWoPUbAdGLMoid40Ubyl5TtpyiEMDP+XQKMC9I=
+after_success: sbt coveralls
