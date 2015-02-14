@@ -23,6 +23,8 @@ lines to your `build.sbt`.
 You can also just clone this project and play around with the example
 worksheets.
 
+Scalaµ works with Scala 2.10 and 2.11 and uses Scalaz 7.0.6.
+
 # Quick Start
 
 Natural numbers as the initial algebra for the `Option` endofunctor.
