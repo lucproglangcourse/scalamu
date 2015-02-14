@@ -18,7 +18,7 @@ lines to your `build.sbt`.
 
     resolvers += "laufer@bintray" at "http://dl.bintray.com/laufer/maven"
 
-    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.2"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.3"
 
 You can also just clone this project and play around with the example
 worksheets.
