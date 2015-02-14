@@ -15,11 +15,7 @@ as initial F-algebras.
 
 # Getting Scalaµ
 
-We are working on properly syncing Scalaµ from Bintray's jcenter to
-Maven Central.
-
-Meanwhile, you can resolve the dependency on Scalaµ by adding these
-lines to your `build.sbt`.
+To use Scalaµ in your project, add these lines to your `build.sbt`:
 
     resolvers += "laufer@bintray" at "http://dl.bintray.com/laufer/maven"
 
