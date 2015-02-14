@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/LoyolaChicagoCode/scalamu.svg)](https://travis-ci.org/LoyolaChicagoCode/scalamu)
 [![Coverage Status](https://coveralls.io/repos/LoyolaChicagoCode/scalamu/badge.svg?branch=master)](https://coveralls.io/r/LoyolaChicagoCode/scalamu?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/8996f07e06ad46019b85c351db66df77)](https://www.codacy.com/public/laufer/scalamu)
 
 # Scalaµ
 
