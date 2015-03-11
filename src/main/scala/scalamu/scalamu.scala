@@ -63,7 +63,8 @@ package object scalamu
 
   /**
    * Implicit value for declaring `µ` as an instance of
-   * typeclass `Equal` in scalaz using `Equal`'s structural equality.
+   * typeclass `Show` in scalaz using `Show`'s default
+   * implementation based on `toString`.
    * This enables `===` and `assert_===` on `µ` instances.
    */
   implicit def MuShow[F[+_]]: Show[µ[F]] = Show.showFromToString
