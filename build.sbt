@@ -10,8 +10,6 @@ crossScalaVersions := Seq("2.10.6", "2.11.7")
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
-seq(bintrayPublishSettings:_*)
-
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-language:higherKinds")
 
 libraryDependencies ++= Seq(
