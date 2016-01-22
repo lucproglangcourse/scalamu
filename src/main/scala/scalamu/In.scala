@@ -20,7 +20,7 @@ object In {
    *              that is, `F[µ[F]]`
    * @return the resulting wrapped instance of `µ[F]`
    */
-  def apply[F[+_]: Functor](value: F[µ[F]]): µ[F] = Cofree((), value)
+  def apply[F[+_]: Functor](value: F[µ[F]]): µ[F] = Cofree[F, Unit]((), value)
 
   /**
    * Extractor from initial F-algebra.
@@ -46,5 +46,5 @@ object In {
    * @param s seed value (starting point) for generating successive values
    */
   def unfold[F[+_]: Functor, B](s: B)(g: B => F[B]): µ[F] =
-    Cofree.unfoldC(s)(g) map Function.const()
+    Cofree.unfoldC(s)(g) map Function.const(())
 }

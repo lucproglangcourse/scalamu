@@ -19,12 +19,12 @@ To use Scalaµ in your project, add these lines to your `build.sbt`:
 
     resolvers += "laufer@bintray" at "http://dl.bintray.com/laufer/maven"
 
-    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.3"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.2.4"
 
 You can also just clone this project and play around with the example
 worksheets.
 
-Scalaµ works with Scala 2.10 and 2.11 and uses Scalaz 7.0.6.
+Scalaµ works with Scala 2.10 and 2.11 and uses Scalaz 7.2.0.
 
 # Quick Start
 
