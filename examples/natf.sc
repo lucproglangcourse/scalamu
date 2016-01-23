@@ -31,16 +31,33 @@ case class Succ[A](n: A) extends NatF[A]
  */
 implicit val NatFFunctor = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
-    case Zero    => Zero
+    case Zero    => Zero: NatF[B]
     case Succ(n) => Succ(f(n))
   }
 }
 
 /** Declaration of `NatF` as an instance of `Equal`. */
-implicit def NatFEqual[A]: Equal[NatF[A]] = Equal.equalA
+trait NatFEqual[A] extends Equal[NatF[A]] {
+  implicit def A: Equal[A]
+  override def equalIsNatural: Boolean = A.equalIsNatural
+  override def equal(a1: NatF[A], a2: NatF[A]) = (a1, a2) match {
+    case (Zero, Zero)       => true
+    case (Succ(l), Succ(r)) => A.equal(l, r)
+    case _ => false
+  }
+}
+implicit def natFEqual[A](implicit A0: Equal[A]): Equal[NatF[A]] = new NatFEqual[A] {
+  implicit def A = A0
+}
 
-/** Declaration of `NatF` as an instance of `Equal`. */
-implicit def NatFShow[A]: Show[NatF[A]] = Show.showFromToString
+/** Declaration of `NatF` as an instance of `Show`. */
+implicit def natFShow[A](implicit A: Show[A]): Show[NatF[A]] = new Show[NatF[A]] {
+  override def show(e: NatF[A]): scalaz.Cord = e match {
+    case Zero    => "Zero"
+    case Succ(r) => "Succ(" +: A.show(r) :+ ")"
+  }
+}
+
 
 /**
  * Least fixpoint of `NatF` (recursive type based on `NatF`)
@@ -111,10 +128,12 @@ three cata plus(zero)  cata toInt assert_=== 3
 two   cata plus(three) cata toInt assert_=== 5
 
 // structural equality should now work
-(Zero: NatF[Nothing]) assert_=== (Zero: NatF[Nothing])
-(Succ(Zero): NatF[Unit]) assert_=== (Succ(Zero): NatF[Unit])
+(Zero: NatF[Unit]) assert_=== (Zero: NatF[Unit])
+(Succ(Zero): NatF[NatF[Unit]]) assert_=== Succ(Zero)
+assert { (Succ(Zero): NatF[NatF[Unit]]) =/= Zero }
 zero assert_=== zero
 three assert_=== three
+assert { three =/= zero }
 
 // imports required for checking equality and functor laws
 // using Scalaz's ScalaCheck bindings
