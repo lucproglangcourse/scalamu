@@ -30,7 +30,7 @@ object In {
    * @return the resulting unwrapped instance of `F[µ[F]]`
    */
   def unapply[F[+_]](wrapped: µ[F]): Option[F[µ[F]]] = Some(wrapped.out)
-  // _.out is the same as _.tail used in cata below
+  // _.out is the same as _.tail used in cata
   // but better conveys its role as inverse of In
 
   /**

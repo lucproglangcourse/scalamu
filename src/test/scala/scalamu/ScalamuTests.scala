@@ -1,14 +1,19 @@
-package scalamu
+package scalamu.test
 
-import scalaz.std.option._ // for Option as Functor instance
-import org.scalatest._
+import org.scalatest.FunSuite
+import scalaz.std.option._   // for Option as Functor and Equal instance
+import scalaz.std.anyVal._   // for Unit as Equal instance
+import scalaz.syntax.equal._ // for === syntax
+import scalaz.syntax.show._ // for .show syntax
+import scalamu._
 
-/**
- * Small sample test, to be expanded later to a proper test suite.
- */
+/** Small sample test, to be expanded later to a proper test suite. */
 class ScalamuTests extends FunSuite {
 
-  // TODO expand
+  // reliably choose Scalaz's === instead of FunSuite's
+  import scala.language.implicitConversions
+  object teo extends scalaz.syntax.ToEqualOps
+  implicit def ToEqualOps[F](v: F)(implicit F0: scalaz.Equal[F]) = teo.ToEqualOps(v)(F0)
 
   type Nat = µ[Option]
 
@@ -23,9 +28,18 @@ class ScalamuTests extends FunSuite {
     case None    => 0
     case Some(n) => n + 1
   }
+  
+  test("Equality on naturals should work") {
+    assert { succ(zero) === succ(zero) }
+  }
 
-  test("Simple catamorphisms should work") {
-    assert { (zero cata toInt) == 0 }
-    assert { (three cata toInt) == 3 }
+  // TODO test show
+  test("Show on naturals should work") {
+    assert { succ(zero).show === "Cofree((),Some(Cofree((),None)))" }
+  }
+
+  test("Simple catamorphisms on naturals should work") {
+    assert { (zero cata toInt) === 0 }
+    assert { (three cata toInt) === 3 }
   }
 }
