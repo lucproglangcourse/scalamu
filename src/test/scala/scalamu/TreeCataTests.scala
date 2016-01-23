@@ -30,7 +30,7 @@ class TreeCataTests extends FunSuite {
     case s            => 1 + s.max
   }
 
-  test("Simple catamorphisms should work") {
+  test("Simple catamorphisms on trees should work") {
     assert { (t cata depth) == 4 }
   }
 }

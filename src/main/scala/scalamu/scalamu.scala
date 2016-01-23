@@ -1,12 +1,18 @@
 import scalaz.{ Show, Equal }
+import shapeless.contrib.scalaz.CofreeInstances
 
 /**
  * Small extensions to scalaz for working with F-algebras, where `F` is an
  * endofunctor of the category Scala types (type constructor of arity 1
  * with a `map` function that obeys certain laws).
+ * 
+ * `CofreeInstances` declares `Cofree` and thereby `µ` as an instance of
+ * scalaz typeclasses `Equal` (using structural equality)
+ * and `Show` (using case-class-lie conversion to a string).
+ * This enables `===`, `assert_===`, and `.show` on `µ` instances.
  */
 package object scalamu
-    extends ToMuOps with ToCofreeCataOps with ToTreeCataOps {
+    extends ToMuOps with ToCofreeCataOps with ToTreeCataOps with CofreeInstances {
 
   /**
    * A (nongeneric) F-algebra with carrier object `B`.
@@ -44,28 +50,9 @@ package object scalamu
    */
   type µ[F[+_]] = scalaz.Cofree[F, Unit]
 
-  /**
-   * Alias for `µ`.
-   */
+  /** Alias for `µ`. */
   type Mu[F[+_]] = µ[F]
 
-  /**
-   * Alias for `In`.
-   */
+  /** Alias for `In`. */
   val µ = In
-
-  /**
-   * Implicit value for declaring `µ` as an instance of
-   * typeclass `Equal` in scalaz using `Equal`'s structural equality.
-   * This enables `===` and `assert_===` on `µ` instances.
-   */
-  implicit def MuEqual[F[+_]]: Equal[µ[F]] = Equal.equalA
-
-  /**
-   * Implicit value for declaring `µ` as an instance of
-   * typeclass `Show` in scalaz using `Show`'s default
-   * implementation based on `toString`.
-   * This enables `===` and `assert_===` on `µ` instances.
-   */
-  implicit def MuShow[F[+_]]: Show[µ[F]] = Show.showFromToString
 }
