@@ -90,7 +90,7 @@ We then recommend looking at the example worksheets in this order:
 
 To run an example worksheet:
 
-    $ sbt console
+    $ sbt test:console
     :load examples/natf.sc
 
 [Here is a more advanced example](https://github.com/LoyolaChicagoCode/simpleimperative-algebraic-scala)
