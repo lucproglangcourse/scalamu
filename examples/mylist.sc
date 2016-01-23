@@ -18,12 +18,12 @@ import scalamu._               // algebra types and injected cata method
  *
  * @tparam A generic item type of the resulting carrier object
  */
-type MyList[+A] = Cofree[Option, A]
+type MyList[A] = Cofree[Option, A]
 
 /**
  * Factory methods for convenience.
  */
-def nil[A](dummy: A):                  MyList[A] = Cofree(dummy, None)
+def nil[A](dummy: A):                  MyList[A] = Cofree(dummy, None: Option[Cofree[Option, A]])
   // need dummy because Cofree expects non-null
 def cons[A](head: A, tail: MyList[A]): MyList[A] = Cofree(head, Some(tail))
 

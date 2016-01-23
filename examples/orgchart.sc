@@ -18,7 +18,7 @@ import scalamu._               // algebra types and injected cata method
  */
 sealed trait NodeF[+A] { def children: Seq[A] }
 case object P extends NodeF[Nothing] { val children = Seq.empty }
-case class OU[A](children: A*) extends NodeF[A]
+case class OU[+A](children: A*) extends NodeF[A]
 
 /**
  * Implicit value for declaring `NodeF` as a `Functor` in scalaz.
@@ -40,12 +40,12 @@ implicit val NodeFFunctor = new Functor[NodeF] {
  *
  * @tparam A generic item type of the resulting carrier object
  */
-type Node[+T] = Cofree[NodeF, T]
+type Node[T] = Cofree[NodeF, T]
 
 /**
  * Factory methods for convenience.
  */
-def p[T](value: T): Node[T]                      = Cofree(value, P)
+def p[T](value: T): Node[T]                      = Cofree(value, P: NodeF[Cofree[NodeF, T]])
 def ou[T](value: T, children: Node[T]*): Node[T] = Cofree(value, OU(children: _*))
 
 val org =
