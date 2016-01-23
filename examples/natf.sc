@@ -23,7 +23,7 @@ import scalamu._                // algebra types and injected cata method
  */
 sealed trait NatF[+A]
 case object Zero extends NatF[Nothing]
-case class Succ[A](n: A) extends NatF[A]
+case class Succ[+A](n: A) extends NatF[A]
 
 /**
  * Implicit value for declaring `NatF` as an instance of
