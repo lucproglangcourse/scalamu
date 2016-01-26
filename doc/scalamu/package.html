@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>scalamu - scalamu</title>
@@ -9,6 +8,11 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -24,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../lib/package_big.png" />
+        <img alt="Package" src="../lib/package_big.png" />
         
-        <h1>scalamu</h1>
+        <h1>scalamu</h1><span class="permalink">
+      <a href="../index.html#scalamu.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -41,10 +49,13 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Small extensions to scalaz for working with F-algebras, where <code>F</code> is an
 endofunctor of the category Scala types (type constructor of arity 1
-with a <code>map</code> function that obeys certain laws).
+with a <code>map</code> function that obeys certain laws).</p><p><code>CofreeInstances</code> declares <code>Cofree</code> and thereby <code>µ</code> as an instance of
+scalaz typeclasses <code>Equal</code> (using structural equality)
+and <code>Show</code> (using case-class-lie conversion to a string).
+This enables <code>===</code>, <code>assert_===</code>, and <code>.show</code> on <code>µ</code> instances.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="ToTreeCataOps.html" class="extype" name="scalamu.ToTreeCataOps">ToTreeCataOps</a>, <a href="ToCofreeCataOps.html" class="extype" name="scalamu.ToCofreeCataOps">ToCofreeCataOps</a>, <a href="ToMuOps.html" class="extype" name="scalamu.ToMuOps">ToMuOps</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="shapeless.contrib.scalaz.CofreeInstances">CofreeInstances</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0">CofreeInstances0</span>, <a href="ToTreeCataOps.html" class="extype" name="scalamu.ToTreeCataOps">ToTreeCataOps</a>, <a href="ToCofreeCataOps.html" class="extype" name="scalamu.ToCofreeCataOps">ToCofreeCataOps</a>, <a href="ToMuOps.html" class="extype" name="scalamu.ToMuOps">ToMuOps</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -62,7 +73,7 @@ with a <code>map</code> function that obeys certain laws).
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalamu"><span>scalamu</span></li><li class="in" name="scalamu.ToTreeCataOps"><span>ToTreeCataOps</span></li><li class="in" name="scalamu.ToCofreeCataOps"><span>ToCofreeCataOps</span></li><li class="in" name="scalamu.ToMuOps"><span>ToMuOps</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalamu"><span>scalamu</span></li><li class="in" name="shapeless.contrib.scalaz.CofreeInstances"><span>CofreeInstances</span></li><li class="in" name="shapeless.contrib.scalaz.CofreeInstances0"><span>CofreeInstances0</span></li><li class="in" name="scalamu.ToTreeCataOps"><span>ToTreeCataOps</span></li><li class="in" name="scalamu.ToCofreeCataOps"><span>ToCofreeCataOps</span></li><li class="in" name="scalamu.ToMuOps"><span>ToMuOps</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -70,7 +81,6 @@ with a <code>map</code> function that obeys certain laws).
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -86,7 +96,7 @@ with a <code>map</code> function that obeys certain laws).
               <h3>Type Members</h3>
               <ol><li name="scalamu.Algebra" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Algebra[F[_],B]=F[B]=&gt;B"></a>
-      <a id="Algebra[F[_],B]:(F[B])⇒B"></a>
+      <a id="Algebra[F[_],B]:Algebra[F,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
@@ -95,11 +105,15 @@ with a <code>map</code> function that obeys certain laws).
       <span class="symbol">
         <span class="name">Algebra</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="B">B</span>]</span><span class="result"> = (<span class="extype" name="scalamu.Algebra.F">F</span>[<span class="extype" name="scalamu.Algebra.B">B</span>]) ⇒ <span class="extype" name="scalamu.Algebra.B">B</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@Algebra[F[_],B]=F[B]=&gt;B" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">A (nongeneric) F-algebra with carrier object <code>B</code>.</p>
     </li><li name="scalamu.Coalgebra" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Coalgebra[F[_],B]=B=&gt;F[B]"></a>
-      <a id="Coalgebra[F[_],B]:(B)⇒F[B]"></a>
+      <a id="Coalgebra[F[_],B]:Coalgebra[F,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
@@ -108,9 +122,13 @@ with a <code>map</code> function that obeys certain laws).
       <span class="symbol">
         <span class="name">Coalgebra</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="B">B</span>]</span><span class="result"> = (<span class="extype" name="scalamu.Coalgebra.B">B</span>) ⇒ <span class="extype" name="scalamu.Coalgebra.F">F</span>[<span class="extype" name="scalamu.Coalgebra.B">B</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@Coalgebra[F[_],B]=B=&gt;F[B]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">A (nongeneric) F-coalgebra with carrier object <code>B</code>.</p>
-    </li><li name="scalamu.CofreeCataOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="scalamu.CofreeCataOps" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="CofreeCataOps[F[+_],A]extendsOps[scalaz.Cofree[F,A]]"></a>
       <a id="CofreeCataOps[F[+_],A]:CofreeCataOps[F,A]"></a>
       <h4 class="signature">
@@ -121,12 +139,18 @@ with a <code>map</code> function that obeys certain laws).
       <span class="symbol">
         <a href="CofreeCataOps.html"><span class="name">CofreeCataOps</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>, <span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scalaz.syntax.Ops">Ops</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.CofreeCataOps.F">F</span>, <span class="extype" name="scalamu.CofreeCataOps.A">A</span>]]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
-patterns for injection into <code>Cofree</code>.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@CofreeCataOps[F[+_],A]extendsOps[scalaz.Cofree[F,A]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into <code>Cofree</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into <code>Cofree</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">F</dt><dd class="cmt"><p>branching endofunctor of this structure</p></dd><dt class="tparam">A</dt><dd class="cmt"><p>generic item type of this structure</p></dd></dl></div>
     </li><li name="scalamu.GenericAlgebra" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GenericAlgebra[A,F[_],B]=A=&gt;(F[B]=&gt;B)"></a>
-      <a id="GenericAlgebra[A,F[_],B]:(A)⇒(F[B])⇒B"></a>
+      <a id="GenericAlgebra[A,F[_],B]:GenericAlgebra[A,F,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
@@ -135,22 +159,30 @@ patterns for injection into <code>Cofree</code>.</p>
       <span class="symbol">
         <span class="name">GenericAlgebra</span><span class="tparams">[<span name="A">A</span>, <span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="B">B</span>]</span><span class="result"> = (<span class="extype" name="scalamu.GenericAlgebra.A">A</span>) ⇒ (<span class="extype" name="scalamu.GenericAlgebra.F">F</span>[<span class="extype" name="scalamu.GenericAlgebra.B">B</span>]) ⇒ <span class="extype" name="scalamu.GenericAlgebra.B">B</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@GenericAlgebra[A,F[_],B]=A=&gt;(F[B]=&gt;B)" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">A generic F-algebra with carrier object <code>B</code> and type parameter <code>A</code>.</p>
     </li><li name="scalamu.Mu" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Mu[F[+_]]=scalamu.package.µ[F]"></a>
-      <a id="Mu[F[+_]]:Mu[F]"></a>
+      <a id="Mu[F[_]]=scalamu.package.µ[F]"></a>
+      <a id="Mu[F[_]]:Mu[F]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">Mu</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result"> = <span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.Mu.F">F</span>, <a href="http://www.scala-lang.org/api/2.10.4/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">Mu</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> = <span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.Mu.F">F</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@Mu[F[_]]=scalamu.package.µ[F]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Alias for <code>µ</code>.</p>
-    </li><li name="scalamu.MuOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="scalamu.MuOps" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="MuOps[F[+_]]extendsOps[scalamu.µ[F]]"></a>
       <a id="MuOps[F[+_]]:MuOps[F]"></a>
       <h4 class="signature">
@@ -159,11 +191,19 @@ patterns for injection into <code>Cofree</code>.</p>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="MuOps.html"><span class="name">MuOps</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result"> extends <span class="extype" name="scalaz.syntax.Ops">Ops</span>[<a href="#µ[F[+_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.MuOps.F">F</span>]]</span>
+        <a href="MuOps.html"><span class="name">MuOps</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result"> extends <span class="extype" name="scalaz.syntax.Ops">Ops</span>[<a href="#µ[F[_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.MuOps.F">F</span>]]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
-patterns for injection into initial F-algebras based on <code>µ</code>.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@MuOps[F[+_]]extendsOps[scalamu.µ[F]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into initial F-algebras based on <code>µ</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into initial F-algebras based on <code>µ</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">F</dt><dd class="cmt"><p>endofunctor of the category Scala types for this structure
+          (type constructor of arity 1 with a <code>map</code> function that obeys
+          certain laws).</p></dd></dl></div>
     </li><li name="scalamu.ToCofreeCataOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ToCofreeCataOpsextendsAnyRef"></a>
       <a id="ToCofreeCataOps:ToCofreeCataOps"></a>
@@ -175,7 +215,11 @@ patterns for injection into initial F-algebras based on <code>µ</code>.</p>
       <span class="symbol">
         <a href="ToCofreeCataOps.html"><span class="name">ToCofreeCataOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToCofreeCataOpsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li><li name="scalamu.ToMuOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ToMuOpsextendsAnyRef"></a>
@@ -188,7 +232,11 @@ patterns for injection into initial F-algebras based on <code>µ</code>.</p>
       <span class="symbol">
         <a href="ToMuOps.html"><span class="name">ToMuOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToMuOpsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li><li name="scalamu.ToTreeCataOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ToTreeCataOpsextendsAnyRef"></a>
@@ -201,9 +249,13 @@ patterns for injection into initial F-algebras based on <code>µ</code>.</p>
       <span class="symbol">
         <a href="ToTreeCataOps.html"><span class="name">ToTreeCataOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToTreeCataOpsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
-    </li><li name="scalamu.TreeCataOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="scalamu.TreeCataOps" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="TreeCataOps[A]extendsOps[scalaz.Tree[A]]"></a>
       <a id="TreeCataOps[A]:TreeCataOps[A]"></a>
       <h4 class="signature">
@@ -214,21 +266,31 @@ patterns for injection into initial F-algebras based on <code>µ</code>.</p>
       <span class="symbol">
         <a href="TreeCataOps.html"><span class="name">TreeCataOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scalaz.syntax.Ops">Ops</span>[<span class="extype" name="scalaz.Tree">Tree</span>[<span class="extype" name="scalamu.TreeCataOps.A">A</span>]]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
-patterns for injection into <code>Tree</code>.</p>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@TreeCataOps[A]extendsOps[scalaz.Tree[A]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into <code>Tree</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps a value <code>self</code> and provides catamorphism and related recursion
+patterns for injection into <code>Tree</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">A</dt><dd class="cmt"><p>generic item type of this tree</p></dd></dl></div>
     </li><li name="scalamu.µ" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="µ[F[+_]]=scalaz.Cofree[F,Unit]"></a>
-      <a id="µ[F[+_]]:µ[F]"></a>
+      <a id="µ[F[_]]=scalaz.Cofree[F,Unit]"></a>
+      <a id="µ[F[_]]:µ[F]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">µ</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result"> = <span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.µ.F">F</span>, <a href="http://www.scala-lang.org/api/2.10.4/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">µ</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> = <span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.µ.F">F</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@µ[F[_]]=scalaz.Cofree[F,Unit]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The least fixpoint operator on endofunctors in the category Scala types.</p><div class="fullcomment"><div class="comment cmt"><p>The least fixpoint operator on endofunctors in the category Scala types.
 This is used to form the carrier object (recursive type) for the initial
 F-algebra.
@@ -241,7 +303,7 @@ Implemented as a partial application of <code>Cofree</code> to <code>Unit</code>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scalamu.In" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="scalamu.In" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="In"></a>
       <a id="In:In"></a>
       <h4 class="signature">
@@ -252,43 +314,17 @@ Implemented as a partial application of <code>Cofree</code> to <code>Unit</code>
       <span class="symbol">
         <a href="In$.html"><span class="name">In</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Object to hold the initial F-algebra, where <code>F</code> is an endofunctor
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@In" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Object to hold the initial F-algebra, where <code>F</code> is an endofunctor
 of the category Scala types (type constructor of arity 1 with a <code>map</code>
-function that obeys certain laws).</p>
-    </li><li name="scalamu.package#MuEqual" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="MuEqual[F[+_]]:scalaz.Equal[scalamu.package.µ[F]]"></a>
-      <a id="MuEqual[F[+_]]:Equal[µ[F]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">MuEqual</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result">: <span class="extype" name="scalaz.Equal">Equal</span>[<a href="#µ[F[+_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.MuEqual.F">F</span>]]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Implicit value for declaring <code>µ</code> as an instance of
-typeclass <code>Equal</code> in scalaz using <code>Equal</code>'s structural equality.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit value for declaring <code>µ</code> as an instance of
-typeclass <code>Equal</code> in scalaz using <code>Equal</code>'s structural equality.
-This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> instances.
-</p></div></div>
-    </li><li name="scalamu.package#MuShow" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="MuShow[F[+_]]:scalaz.Show[scalamu.package.µ[F]]"></a>
-      <a id="MuShow[F[+_]]:Show[µ[F]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">MuShow</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="result">: <span class="extype" name="scalaz.Show">Show</span>[<a href="#µ[F[+_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.MuShow.F">F</span>]]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Implicit value for declaring <code>µ</code> as an instance of
-typeclass <code>Equal</code> in scalaz using <code>Equal</code>'s structural equality.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit value for declaring <code>µ</code> as an instance of
-typeclass <code>Equal</code> in scalaz using <code>Equal</code>'s structural equality.
-This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> instances.
+function that obeys certain laws).</p><div class="fullcomment"><div class="comment cmt"><p>Object to hold the initial F-algebra, where <code>F</code> is an endofunctor
+of the category Scala types (type constructor of arity 1 with a <code>map</code>
+function that obeys certain laws).
+This also serves as a companion to the fixpoint type constructor µ.
 </p></div></div>
     </li><li name="scalamu.ToCofreeCataOps#ToCofreeCataOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ToCofreeCataOps[F[+_],A](c:scalaz.Cofree[F,A])(implicitevidence$1:scalaz.Functor[F]):scalamu.CofreeCataOps[F,A]"></a>
@@ -301,7 +337,11 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
       <span class="symbol">
         <span class="name">ToCofreeCataOps</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span name="c">c: <span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="scalamu.ToCofreeCataOps.ToCofreeCataOps.F">F</span>, <span class="extype" name="scalamu.ToCofreeCataOps.ToCofreeCataOps.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scalaz.Functor">Functor</span>[<span class="extype" name="scalamu.ToCofreeCataOps.ToCofreeCataOps.F">F</span>]</span>)</span><span class="result">: <a href="CofreeCataOps.html" class="extype" name="scalamu.CofreeCataOps">CofreeCataOps</a>[<span class="extype" name="scalamu.ToCofreeCataOps.ToCofreeCataOps.F">F</span>, <span class="extype" name="scalamu.ToCofreeCataOps.ToCofreeCataOps.A">A</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToCofreeCataOps[F[+_],A](c:scalaz.Cofree[F,A])(implicitevidence$1:scalaz.Functor[F]):scalamu.CofreeCataOps[F,A]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToCofreeCataOps.html" class="extype" name="scalamu.ToCofreeCataOps">ToCofreeCataOps</a></dd></dl></div>
     </li><li name="scalamu.ToMuOps#ToMuOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ToMuOps[F[+_]](c:scalamu.µ[F])(implicitevidence$1:scalaz.Functor[F]):scalamu.MuOps[F]"></a>
@@ -312,9 +352,13 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ToMuOps</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="params">(<span name="c">c: <a href="#µ[F[+_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scalaz.Functor">Functor</span>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>)</span><span class="result">: <a href="MuOps.html" class="extype" name="scalamu.MuOps">MuOps</a>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>
+        <span class="name">ToMuOps</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>]</span><span class="params">(<span name="c">c: <a href="#µ[F[_]]=scalaz.Cofree[F,Unit]" class="extmbr" name="scalamu.µ">µ</a>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scalaz.Functor">Functor</span>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>)</span><span class="result">: <a href="MuOps.html" class="extype" name="scalamu.MuOps">MuOps</a>[<span class="extype" name="scalamu.ToMuOps.ToMuOps.F">F</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToMuOps[F[+_]](c:scalamu.µ[F])(implicitevidence$1:scalaz.Functor[F]):scalamu.MuOps[F]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToMuOps.html" class="extype" name="scalamu.ToMuOps">ToMuOps</a></dd></dl></div>
     </li><li name="scalamu.ToTreeCataOps#ToTreeCataOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ToTreeCataOps[A](t:scalaz.Tree[A]):scalamu.TreeCataOps[A]"></a>
@@ -327,9 +371,64 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
       <span class="symbol">
         <span class="name">ToTreeCataOps</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="t">t: <span class="extype" name="scalaz.Tree">Tree</span>[<span class="extype" name="scalamu.ToTreeCataOps.ToTreeCataOps.A">A</span>]</span>)</span><span class="result">: <a href="TreeCataOps.html" class="extype" name="scalamu.TreeCataOps">TreeCataOps</a>[<span class="extype" name="scalamu.ToTreeCataOps.ToTreeCataOps.A">A</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@ToTreeCataOps[A](t:scalaz.Tree[A]):scalamu.TreeCataOps[A]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToTreeCataOps.html" class="extype" name="scalamu.ToTreeCataOps">ToTreeCataOps</a></dd></dl></div>
-    </li><li name="scalamu.package#µ" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="shapeless.contrib.scalaz.CofreeInstances0#cofreeEqual" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cofreeEqual[F[+_],A](implicitA0:scalaz.Equal[A],implicitF0:shapeless.Lazy[scalaz.Equal[F[scalaz.Cofree[F,A]]]]):scalaz.Equal[scalaz.Cofree[F,A]]"></a>
+      <a id="cofreeEqual[F[+_],A](Equal[A],Lazy[Equal[F[Cofree[F,A]]]]):Equal[Cofree[F,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cofreeEqual</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="A0">A0: <span class="extype" name="scalaz.Equal">Equal</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.A">A</span>]</span>, <span name="F0">F0: <span class="extype" name="shapeless.Lazy">Lazy</span>[<span class="extype" name="scalaz.Equal">Equal</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.F">F</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.A">A</span>]]]]</span>)</span><span class="result">: <span class="extype" name="scalaz.Equal">Equal</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0.cofreeEqual.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@cofreeEqual[F[+_],A](implicitA0:scalaz.Equal[A],implicitF0:shapeless.Lazy[scalaz.Equal[F[scalaz.Cofree[F,A]]]]):scalaz.Equal[scalaz.Cofree[F,A]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CofreeInstances0</dd></dl></div>
+    </li><li name="shapeless.contrib.scalaz.CofreeInstances#cofreeOrder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cofreeOrder[F[+_],A](implicitA0:scalaz.Order[A],implicitF0:shapeless.Lazy[scalaz.Order[F[scalaz.Cofree[F,A]]]]):scalaz.Order[scalaz.Cofree[F,A]]"></a>
+      <a id="cofreeOrder[F[+_],A](Order[A],Lazy[Order[F[Cofree[F,A]]]]):Order[Cofree[F,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cofreeOrder</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="A0">A0: <span class="extype" name="scalaz.Order">Order</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.A">A</span>]</span>, <span name="F0">F0: <span class="extype" name="shapeless.Lazy">Lazy</span>[<span class="extype" name="scalaz.Order">Order</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.F">F</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.A">A</span>]]]]</span>)</span><span class="result">: <span class="extype" name="scalaz.Order">Order</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeOrder.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@cofreeOrder[F[+_],A](implicitA0:scalaz.Order[A],implicitF0:shapeless.Lazy[scalaz.Order[F[scalaz.Cofree[F,A]]]]):scalaz.Order[scalaz.Cofree[F,A]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CofreeInstances</dd></dl></div>
+    </li><li name="shapeless.contrib.scalaz.CofreeInstances#cofreeShow" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cofreeShow[F[+_],A](implicitA:scalaz.Show[A],implicitF:shapeless.Lazy[scalaz.Show[F[scalaz.Cofree[F,A]]]]):scalaz.Show[scalaz.Cofree[F,A]]"></a>
+      <a id="cofreeShow[F[+_],A](Show[A],Lazy[Show[F[Cofree[F,A]]]]):Show[Cofree[F,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cofreeShow</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">+_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="A">A: <span class="extype" name="scalaz.Show">Show</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.A">A</span>]</span>, <span name="F">F: <span class="extype" name="shapeless.Lazy">Lazy</span>[<span class="extype" name="scalaz.Show">Show</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.F">F</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.A">A</span>]]]]</span>)</span><span class="result">: <span class="extype" name="scalaz.Show">Show</span>[<span class="extype" name="scalaz.Cofree">Cofree</span>[<span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.F">F</span>, <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances.cofreeShow.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@cofreeShow[F[+_],A](implicitA:scalaz.Show[A],implicitF:shapeless.Lazy[scalaz.Show[F[scalaz.Cofree[F,A]]]]):scalaz.Show[scalaz.Cofree[F,A]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CofreeInstances</dd></dl></div>
+    </li><li name="scalamu#µ" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="µ:scalamu.In.type"></a>
       <a id="µ:In.type"></a>
       <h4 class="signature">
@@ -340,7 +439,11 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
       <span class="symbol">
         <span class="name">µ</span><span class="result">: <a href="In$.html" class="extype" name="scalamu.In">In</a>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../index.html#scalamu.package@µ:scalamu.In.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Alias for <code>In</code>.</p>
     </li></ol>
             </div>
@@ -351,7 +454,11 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalamu.ToTreeCataOps">
+        <div class="parent" name="shapeless.contrib.scalaz.CofreeInstances">
+              <h3>Inherited from <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances">CofreeInstances</span></h3>
+            </div><div class="parent" name="shapeless.contrib.scalaz.CofreeInstances0">
+              <h3>Inherited from <span class="extype" name="shapeless.contrib.scalaz.CofreeInstances0">CofreeInstances0</span></h3>
+            </div><div class="parent" name="scalamu.ToTreeCataOps">
               <h3>Inherited from <a href="ToTreeCataOps.html" class="extype" name="scalamu.ToTreeCataOps">ToTreeCataOps</a></h3>
             </div><div class="parent" name="scalamu.ToCofreeCataOps">
               <h3>Inherited from <a href="ToCofreeCataOps.html" class="extype" name="scalamu.ToCofreeCataOps">ToCofreeCataOps</a></h3>
@@ -377,6 +484,7 @@ This enables <code>===</code> and <code>assert_===</code> on <code>µ</code> ins
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
+
+
     </body>
       </html>

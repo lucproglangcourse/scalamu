@@ -1,0 +1,640 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>shapeless - shapeless</title>
+          <meta name="description" content="shapeless - shapeless" />
+          <meta name="keywords" content="shapeless shapeless" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'shapeless.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../lib/package_big.png" />
+        
+        <h1>shapeless</h1><span class="permalink">
+      <a href="../index.html#shapeless.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">shapeless</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="shapeless"><span>shapeless</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="shapeless.Const" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Const[C&lt;:&lt;?&gt;]=AnyRef{typeλ[T]=C}"></a>
+      <a id="Const[C]:Const[C]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Const</span><span class="tparams">[<span name="C">C</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { type λ[T] = C }</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@Const[C]=AnyRef{typeλ[T]=C}" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.Everything" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Everything[F&lt;:&lt;?&gt;,K&lt;:&lt;?&gt;,T&lt;:&lt;?&gt;]=shapeless.package.poly.Case1[shapeless.EverythingAux[F,K],T]"></a>
+      <a id="Everything[F&lt;:Poly,K&lt;:Poly,T]:Everything[F,K,T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Everything</span><span class="tparams">[<span name="F">F &lt;: <span class="extype" name="shapeless.Poly">Poly</span></span>, <span name="K">K &lt;: <span class="extype" name="shapeless.Poly">Poly</span></span>, <span name="T">T</span>]</span><span class="result"> = <span class="extype" name="shapeless.PolyDefns.Case">Case</span>[<span class="extype" name="shapeless.EverythingAux">EverythingAux</span>[<span class="extype" name="shapeless.Everything.F">F</span>, <span class="extype" name="shapeless.Everything.K">K</span>], <span class="extype" name="shapeless.::">::</span>[<span class="extype" name="shapeless.Everything.T">T</span>, <span class="extype" name="shapeless.HNil">HNil</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@Everything[F&lt;:shapeless.Poly,K&lt;:shapeless.Poly,T]=shapeless.package.poly.Case1[shapeless.EverythingAux[F,K],T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.Everywhere" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Everywhere[F&lt;:&lt;?&gt;,T&lt;:&lt;?&gt;]=shapeless.package.poly.Case1[shapeless.EverywhereAux[F],T]"></a>
+      <a id="Everywhere[F&lt;:Poly,T]:Everywhere[F,T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Everywhere</span><span class="tparams">[<span name="F">F &lt;: <span class="extype" name="shapeless.Poly">Poly</span></span>, <span name="T">T</span>]</span><span class="result"> = <span class="extype" name="shapeless.PolyDefns.Case">Case</span>[<span class="extype" name="shapeless.EverywhereAux">EverywhereAux</span>[<span class="extype" name="shapeless.Everywhere.F">F</span>], <span class="extype" name="shapeless.::">::</span>[<span class="extype" name="shapeless.Everywhere.T">T</span>, <span class="extype" name="shapeless.HNil">HNil</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@Everywhere[F&lt;:shapeless.Poly,T]=shapeless.package.poly.Case1[shapeless.EverywhereAux[F],T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.Id" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Id[+T&lt;:&lt;?&gt;]=T"></a>
+      <a id="Id[+T]:Id[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Id</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> = <span class="extype" name="shapeless.Id.T">T</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@Id[+T]=T" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.|¬|" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="|¬|[T&lt;:&lt;?&gt;]=AnyRef{typeλ[U]=shapeless.package.&lt;:!&lt;[U,T]}"></a>
+      <a id="|¬|[T]:|¬|[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bar$u00AC$bar" class="name">|¬|</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { type λ[U] = shapeless.package.&lt;:!&lt;[U,T] }</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@|¬|[T]=AnyRef{typeλ[U]=shapeless.package.&lt;:!&lt;[U,T]}" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.|∨|" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="|∨|[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;]=AnyRef{typeλ[X]=&lt;:&lt;[shapeless.package.¬¬[X],shapeless.package.∨[T,U]]}"></a>
+      <a id="|∨|[T,U]:|∨|[T,U]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bar$u2228$bar" class="name">|∨|</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { type λ[X] = &lt;:&lt;[shapeless.package.¬¬[X],shapeless.package.∨[T,U]] }</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@|∨|[T,U]=AnyRef{typeλ[X]=&lt;:&lt;[shapeless.package.¬¬[X],shapeless.package.∨[T,U]]}" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.¬" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="¬[T&lt;:&lt;?&gt;]=T=&gt;Nothing"></a>
+      <a id="¬[T]:¬[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u00AC" class="name">¬</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = (<span class="extype" name="shapeless.¬.T">T</span>) ⇒ <span class="extype" name="scala.Nothing">Nothing</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@¬[T]=T=&gt;Nothing" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.¬¬" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="¬¬[T&lt;:&lt;?&gt;]=shapeless.package.¬[shapeless.package.¬[T]]"></a>
+      <a id="¬¬[T]:¬¬[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u00AC$u00AC" class="name">¬¬</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = (<a href="#¬[T]=T=&gt;Nothing" class="extmbr" name="shapeless.¬">¬</a>[<span class="extype" name="shapeless.¬¬.T">T</span>]) ⇒ <span class="extype" name="scala.Nothing">Nothing</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@¬¬[T]=shapeless.package.¬[shapeless.package.¬[T]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.∀" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="∀[P&lt;:&lt;?&gt;]=shapeless.package.¬[shapeless.package.∃[[X&lt;:&lt;?&gt;]P[X]=&gt;Nothing]]"></a>
+      <a id="∀[P[_]]:∀[P]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2200" class="name">∀</span><span class="tparams">[<span name="P">P<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> = (<a href="#∃[P&lt;:&lt;?&gt;]=P[_]" class="extmbr" name="shapeless.∃">∃</a>[[X](<span class="extype" name="shapeless.∀.P">P</span>[<span class="extype" name="shapeless.&lt;refinement&gt;.λ.X">X</span>]) ⇒ <span class="extype" name="scala.Nothing">Nothing</span>]) ⇒ <span class="extype" name="scala.Nothing">Nothing</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@∀[P[_]]=shapeless.package.¬[shapeless.package.∃[[X]P[X]=&gt;Nothing]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.∃" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="∃[P[_&lt;:&lt;?&gt;]]=P[_]"></a>
+      <a id="∃[P[_]]:∃[P]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2203" class="name">∃</span><span class="tparams">[<span name="P">P<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> = <span class="extype" name="shapeless.∃.P">P</span>[_]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@∃[P[_]]=P[_]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.∧" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="∧[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;]=TwithU"></a>
+      <a id="∧[T,U]:∧[T,U]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2227" class="name">∧</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="result"> = <span class="extype" name="shapeless.∧.T">T</span> with <span class="extype" name="shapeless.∧.U">U</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@∧[T,U]=TwithU" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.∨" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="∨[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;]=shapeless.package.¬[shapeless.package.∧[shapeless.package.¬[T],shapeless.package.¬[U]]]"></a>
+      <a id="∨[T,U]:∨[T,U]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2228" class="name">∨</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="result"> = (<a href="#∧[T,U]=TwithU" class="extmbr" name="shapeless.∧">∧</a>[<a href="#¬[T]=T=&gt;Nothing" class="extmbr" name="shapeless.¬">¬</a>[<span class="extype" name="shapeless.∨.T">T</span>], <a href="#¬[T]=T=&gt;Nothing" class="extmbr" name="shapeless.¬">¬</a>[<span class="extype" name="shapeless.∨.U">U</span>]]) ⇒ <span class="extype" name="scala.Nothing">Nothing</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@∨[T,U]=shapeless.package.¬[shapeless.package.∧[shapeless.package.¬[T],shapeless.package.¬[U]]]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="shapeless#^" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="^:shapeless.Path.type"></a>
+      <a id="^:Path.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $up" class="name">^</span><span class="result">: <span class="extype" name="shapeless.Path">Path</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@^:shapeless.Path.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#cachedImplicit" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cachedImplicit[T&lt;:&lt;?&gt;]:T"></a>
+      <a id="cachedImplicit[T]:T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">macro </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cachedImplicit</span><span class="tparams">[<span name="T">T</span>]</span><span class="result">: <span class="extype" name="shapeless.cachedImplicit.T">T</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@cachedImplicit[T]:T" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless.contrib" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="contrib"></a>
+      <a id="contrib:contrib"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="contrib/package.html"><span class="name">contrib</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@contrib" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#everything" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="everything(f:&lt;?&gt;):shapeless.package.ApplyEverything[f.type]"></a>
+      <a id="everything(Poly):ApplyEverything[f.type]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">everything</span><span class="params">(<span name="f">f: <span class="extype" name="shapeless.Poly">Poly</span></span>)</span><span class="result">: <span class="extype" name="shapeless.ApplyEverything">ApplyEverything</span>[<span class="extype" name="shapeless.everything.f">f</span>.type]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@everything(f:shapeless.Poly):shapeless.package.ApplyEverything[f.type]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#everywhere" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="everywhere(f:&lt;?&gt;):shapeless.EverywhereAux[f.type]"></a>
+      <a id="everywhere(Poly):EverywhereAux[f.type]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">everywhere</span><span class="params">(<span name="f">f: <span class="extype" name="shapeless.Poly">Poly</span></span>)</span><span class="result">: <span class="extype" name="shapeless.EverywhereAux">EverywhereAux</span>[<span class="extype" name="shapeless.everywhere.f">f</span>.type]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@everywhere(f:shapeless.Poly):shapeless.EverywhereAux[f.type]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#fin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fin:shapeless.Fin.type"></a>
+      <a id="fin:Fin.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fin</span><span class="result">: <span class="extype" name="shapeless.Fin">Fin</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@fin:shapeless.Fin.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#lens" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="lens:shapeless.OpticDefns.type"></a>
+      <a id="lens:OpticDefns.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">lens</span><span class="result">: <span class="extype" name="shapeless.OpticDefns">OpticDefns</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@lens:shapeless.OpticDefns.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#nat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nat:shapeless.Nat.type"></a>
+      <a id="nat:Nat.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nat</span><span class="result">: <span class="extype" name="shapeless.Nat">Nat</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@nat:shapeless.Nat.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#neq" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="neq[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]:shapeless.package.=:!=[A,B]"></a>
+      <a id="neq[A,B]:=:!=[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">neq</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result">: <span class="extype" name="shapeless.=:!=">=:!=</span>[<span class="extype" name="shapeless.neq.A">A</span>, <span class="extype" name="shapeless.neq.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@neq[A,B]:shapeless.package.=:!=[A,B]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#neqAmbig1" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="neqAmbig1[A&lt;:&lt;?&gt;]:shapeless.package.=:!=[A,A]"></a>
+      <a id="neqAmbig1[A]:=:!=[A,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">neqAmbig1</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <span class="extype" name="shapeless.=:!=">=:!=</span>[<span class="extype" name="shapeless.neqAmbig1.A">A</span>, <span class="extype" name="shapeless.neqAmbig1.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@neqAmbig1[A]:shapeless.package.=:!=[A,A]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#neqAmbig2" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="neqAmbig2[A&lt;:&lt;?&gt;]:shapeless.package.=:!=[A,A]"></a>
+      <a id="neqAmbig2[A]:=:!=[A,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">neqAmbig2</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <span class="extype" name="shapeless.=:!=">=:!=</span>[<span class="extype" name="shapeless.neqAmbig2.A">A</span>, <span class="extype" name="shapeless.neqAmbig2.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@neqAmbig2[A]:shapeless.package.=:!=[A,A]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#nsub" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nsub[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]:shapeless.package.&lt;:!&lt;[A,B]"></a>
+      <a id="nsub[A,B]:&lt;:!&lt;[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nsub</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result">: <span class="extype" name="shapeless.&lt;:!&lt;">&lt;:!&lt;</span>[<span class="extype" name="shapeless.nsub.A">A</span>, <span class="extype" name="shapeless.nsub.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@nsub[A,B]:shapeless.package.&lt;:!&lt;[A,B]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#nsubAmbig1" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nsubAmbig1[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]:shapeless.package.&lt;:!&lt;[A,B]"></a>
+      <a id="nsubAmbig1[A,B&gt;:A]:&lt;:!&lt;[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nsubAmbig1</span><span class="tparams">[<span name="A">A</span>, <span name="B">B &gt;: <span class="extype" name="shapeless.nsubAmbig1.A">A</span></span>]</span><span class="result">: <span class="extype" name="shapeless.&lt;:!&lt;">&lt;:!&lt;</span>[<span class="extype" name="shapeless.nsubAmbig1.A">A</span>, <span class="extype" name="shapeless.nsubAmbig1.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@nsubAmbig1[A,B&gt;:A]:shapeless.package.&lt;:!&lt;[A,B]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#nsubAmbig2" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nsubAmbig2[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]:shapeless.package.&lt;:!&lt;[A,B]"></a>
+      <a id="nsubAmbig2[A,B&gt;:A]:&lt;:!&lt;[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nsubAmbig2</span><span class="tparams">[<span name="A">A</span>, <span name="B">B &gt;: <span class="extype" name="shapeless.nsubAmbig2.A">A</span></span>]</span><span class="result">: <span class="extype" name="shapeless.&lt;:!&lt;">&lt;:!&lt;</span>[<span class="extype" name="shapeless.nsubAmbig2.A">A</span>, <span class="extype" name="shapeless.nsubAmbig2.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@nsubAmbig2[A,B&gt;:A]:shapeless.package.&lt;:!&lt;[A,B]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#optic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="optic:shapeless.OpticDefns.type"></a>
+      <a id="optic:OpticDefns.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optic</span><span class="result">: <span class="extype" name="shapeless.OpticDefns">OpticDefns</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@optic:shapeless.OpticDefns.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#poly" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="poly:shapeless.PolyDefns.type"></a>
+      <a id="poly:PolyDefns.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">poly</span><span class="result">: <span class="extype" name="shapeless.PolyDefns">PolyDefns</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@poly:shapeless.PolyDefns.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#prism" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="prism:shapeless.OpticDefns.type"></a>
+      <a id="prism:OpticDefns.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">prism</span><span class="result">: <span class="extype" name="shapeless.OpticDefns">OpticDefns</span>.type</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@prism:shapeless.OpticDefns.type" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="shapeless#unexpected" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="unexpected:Nothing"></a>
+      <a id="unexpected:Nothing"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">unexpected</span><span class="result">: <span class="extype" name="scala.Nothing">Nothing</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#shapeless.package@unexpected:Nothing" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

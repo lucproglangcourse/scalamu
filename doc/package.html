@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>root - _root_</title>
@@ -9,6 +8,11 @@
           
       <link href="lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="lib/template.js"></script>
+      <script type="text/javascript" src="lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = 'index.html';
@@ -24,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="lib/package_big.png" />
+        <img alt="Package" src="lib/package_big.png" />
         
-        <h1>root package</h1>
+        <h1>root package</h1><span class="permalink">
+      <a href="index.html#package" title="Permalink" target="_top">
+        <img src="lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -62,7 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="_root_.scalamu" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="_root_.scalamu" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="scalamu"></a>
       <a id="scalamu:scalamu"></a>
       <h4 class="signature">
@@ -73,10 +81,20 @@
       <span class="symbol">
         <a href="scalamu/package.html"><span class="name">scalamu</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Small extensions to scalaz for working with F-algebras, where <code>F</code> is an
+      </h4><span class="permalink">
+      <a href="index.html#package@scalamu" title="Permalink" target="_top">
+        <img src="lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Small extensions to scalaz for working with F-algebras, where <code>F</code> is an
 endofunctor of the category Scala types (type constructor of arity 1
-with a <code>map</code> function that obeys certain laws).</p>
+with a <code>map</code> function that obeys certain laws).</p><div class="fullcomment"><div class="comment cmt"><p>Small extensions to scalaz for working with F-algebras, where <code>F</code> is an
+endofunctor of the category Scala types (type constructor of arity 1
+with a <code>map</code> function that obeys certain laws).</p><p><code>CofreeInstances</code> declares <code>Cofree</code> and thereby <code>µ</code> as an instance of
+scalaz typeclasses <code>Equal</code> (using structural equality)
+and <code>Show</code> (using case-class-lie conversion to a string).
+This enables <code>===</code>, <code>assert_===</code>, and <code>.show</code> on <code>µ</code> instances.
+</p></div></div>
     </li><li name="_root_.scalaz" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="scalaz"></a>
       <a id="scalaz:scalaz"></a>
@@ -88,7 +106,28 @@ with a <code>map</code> function that obeys certain laws).</p>
       <span class="symbol">
         <a href="scalaz/package.html"><span class="name">scalaz</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="index.html#package@scalaz" title="Permalink" target="_top">
+        <img src="lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="_root_.shapeless" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="shapeless"></a>
+      <a id="shapeless:shapeless"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="shapeless/package.html"><span class="name">shapeless</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="index.html#package@shapeless" title="Permalink" target="_top">
+        <img src="lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li></ol>
             </div>
@@ -115,6 +154,7 @@ with a <code>map</code> function that obeys certain laws).</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="lib/template.js"></script>
+
+
     </body>
       </html>
