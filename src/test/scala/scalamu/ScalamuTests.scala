@@ -3,17 +3,13 @@ package scalamu.test
 import org.scalatest.FunSuite
 import scalaz.std.option._   // for Option as Functor and Equal instance
 import scalaz.std.anyVal._   // for Unit as Equal instance
-import scalaz.syntax.equal._ // for === syntax
-import scalaz.syntax.show._ // for .show syntax
+import scalaz.syntax.equal._ // for ≟ and ≠
 import scalamu._
 
 /** Small sample test, to be expanded later to a proper test suite. */
 class ScalamuTests extends FunSuite {
 
-  // reliably choose Scalaz's === instead of FunSuite's
-  import scala.language.implicitConversions
-  object teo extends scalaz.syntax.ToEqualOps
-  implicit def ToEqualOps[F](v: F)(implicit F0: scalaz.Equal[F]) = teo.ToEqualOps(v)(F0)
+  // using ≟ and ≠ to avoid ambiguity of ===
 
   type Nat = µ[Option]
 
@@ -30,16 +26,21 @@ class ScalamuTests extends FunSuite {
   }
   
   test("Equality on naturals should work") {
-    assert { succ(zero) === succ(zero) }
+    assert { zero ≟ zero }
+    assert { one ≠ zero }
+    assert { one ≟ succ(zero) }
+    assert { two ≟ succ(succ(zero)) }
+    assert { three ≟ succ(succ(succ(zero))) }
   }
 
-  // TODO test show
   test("Show on naturals should work") {
-    assert { succ(zero).show === "Cofree((),Some(Cofree((),None)))" }
+    import scalaz.syntax.show._ // for .show syntax
+    assert { zero.show ≟ "Cofree((),None)" }
+    assert { two.show ≟ "Cofree((),Some(Cofree((),Some(Cofree((),None)))))" }
   }
 
   test("Simple catamorphisms on naturals should work") {
-    assert { (zero cata toInt) === 0 }
-    assert { (three cata toInt) === 3 }
+    assert { (zero cata toInt) ≟ 0 }
+    assert { (three cata toInt) ≟ 3 }
   }
 }

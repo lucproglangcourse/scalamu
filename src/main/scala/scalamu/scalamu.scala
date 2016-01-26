@@ -48,10 +48,10 @@ package object scalamu
    *
    * @tparam F endofunctor whose least fixpoint we are forming
    */
-  type µ[F[+_]] = scalaz.Cofree[F, Unit]
+  type µ[F[_]] = scalaz.Cofree[F, Unit]
 
   /** Alias for `µ`. */
-  type Mu[F[+_]] = µ[F]
+  type Mu[F[_]] = µ[F]
 
   /** Alias for `In`. */
   val µ = In
