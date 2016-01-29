@@ -5,6 +5,8 @@ import scalaz.Functor
 import scalaz.syntax.functor._
 import scalaz.syntax.Ops
 
+// TODO http://stackoverflow.com/questions/20699105/using-implicit-class-to-override-method
+
 /**
  * Wraps a value `self` and provides catamorphism and related recursion
  * patterns for injection into `Cofree`.
@@ -12,7 +14,7 @@ import scalaz.syntax.Ops
  * @tparam F branching endofunctor of this structure
  * @tparam A generic item type of this structure
  */
-trait CofreeCataOps[F[+_], A] extends Ops[Cofree[F, A]] {
+trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
 
   implicit def FunctorF: Functor[F]
 
@@ -51,11 +53,13 @@ trait CofreeCataOps[F[+_], A] extends Ops[Cofree[F, A]] {
    */
   def para[B](p: A => F[Cofree[F, A]] => F[B] => B): B =
     p(self.head)(self.tail)(self.tail map { _ para p })
+    
+  
 }
 
 trait ToCofreeCataOps {
   import scala.language.implicitConversions
-  implicit def ToCofreeCataOps[F[+_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
+  implicit def ToCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
     new CofreeCataOps[F, A] {
       def self = c
       override val FunctorF = implicitly[Functor[F]]

@@ -1,6 +1,5 @@
-import scalaz.{ Show, Equal }
+import scalaz.Cofree
 import shapeless.contrib.scalaz.CofreeInstances
-
 /**
  * Small extensions to scalaz for working with F-algebras, where `F` is an
  * endofunctor of the category Scala types (type constructor of arity 1
@@ -8,11 +7,11 @@ import shapeless.contrib.scalaz.CofreeInstances
  * 
  * `CofreeInstances` declares `Cofree` and thereby `µ` as an instance of
  * scalaz typeclasses `Equal` (using structural equality)
- * and `Show` (using case-class-lie conversion to a string).
+ * and `Show` (using case-class-like conversion to a string).
  * This enables `===`, `assert_===`, and `.show` on `µ` instances.
  */
-package object scalamu
-    extends ToMuOps with ToCofreeCataOps with ToTreeCataOps with CofreeInstances {
+package object scalamu 
+  extends ToMuOps with ToCofreeCataOps with ToTreeCataOps with CofreeInstances {
 
   /**
    * A (nongeneric) F-algebra with carrier object `B`.
@@ -48,7 +47,7 @@ package object scalamu
    *
    * @tparam F endofunctor whose least fixpoint we are forming
    */
-  type µ[F[_]] = scalaz.Cofree[F, Unit]
+  type µ[F[_]] = Cofree[F, Unit]
 
   /** Alias for `µ`. */
   type Mu[F[_]] = µ[F]

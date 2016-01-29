@@ -11,11 +11,11 @@ import scalaz.syntax.Ops
  *           (type constructor of arity 1 with a `map` function that obeys
  *           certain laws).
  */
-trait MuOps[F[+_]] extends Ops[µ[F]] {
+trait MuOps[F[_]] extends Ops[µ[F]] {
 
   implicit def FunctorF: Functor[F]
 
-  object cofreeCata extends ToCofreeCataOps
+  object ops extends ToCofreeCataOps
 
   /**
    * The catamorphism (generalized fold) for the F-algebra `ϕ`
@@ -29,7 +29,7 @@ trait MuOps[F[+_]] extends Ops[µ[F]] {
    * @return the result of applying `(| ϕ |)` to this instance of `µ[F]`
    */
   def cata[B](ϕ: F[B] => B): B =
-    cofreeCata.ToCofreeCataOps(self) cata Function.const(ϕ)
+    ops.ToCofreeCataOps(self) cata Function.const(ϕ)
 
   /**
    * The paramorphism (generalized catamorphism) for the morphism `ψ`
@@ -47,12 +47,12 @@ trait MuOps[F[+_]] extends Ops[µ[F]] {
    *         `Cofree[F, A]`
    */
   def para[B](ψ: F[µ[F]] => F[B] => B): B =
-    cofreeCata.ToCofreeCataOps(self) para Function.const(ψ)
+    ops.ToCofreeCataOps(self) para Function.const(ψ)
 }
 
 trait ToMuOps {
   import scala.language.implicitConversions
-  implicit def ToMuOps[F[+_]: Functor](c: µ[F]): MuOps[F] =
+  implicit def ToMuOps[F[_]: Functor](c: µ[F]): MuOps[F] =
     new MuOps[F] {
       def self = c
       override val FunctorF = implicitly[Functor[F]]

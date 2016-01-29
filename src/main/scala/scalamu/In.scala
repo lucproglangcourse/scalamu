@@ -20,7 +20,7 @@ object In {
    *              that is, `F[µ[F]]`
    * @return the resulting wrapped instance of `µ[F]`
    */
-  def apply[F[+_]: Functor](value: F[µ[F]]): µ[F] = Cofree[F, Unit]((), value)
+  def apply[F[_]: Functor](value: F[µ[F]]): µ[F] = Cofree[F, Unit]((), value)
 
   /**
    * Extractor from initial F-algebra.
@@ -29,7 +29,7 @@ object In {
    * @param wrapped a wrapped instance of `µ[F]`
    * @return the resulting unwrapped instance of `F[µ[F]]`
    */
-  def unapply[F[+_]](wrapped: µ[F]): Option[F[µ[F]]] = Some(wrapped.out)
+  def unapply[F[_]](wrapped: µ[F]): Option[F[µ[F]]] = Some(wrapped.out)
   // _.out is the same as _.tail used in cata
   // but better conveys its role as inverse of In
 
@@ -45,6 +45,6 @@ object In {
    * @tparam B carrier object of `g`
    * @param s seed value (starting point) for generating successive values
    */
-  def unfold[F[+_]: Functor, B](s: B)(g: B => F[B]): µ[F] =
+  def unfold[F[_]: Functor, B](s: B)(g: B => F[B]): µ[F] =
     Cofree.unfoldC(s)(g) map Function.const(())
 }

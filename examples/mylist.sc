@@ -23,9 +23,9 @@ type MyList[A] = Cofree[Option, A]
 /**
  * Factory methods for convenience.
  */
-def nil[A](dummy: A):                  MyList[A] = Cofree(dummy, None: Option[Cofree[Option, A]])
+def nil[A](dummy: A)                  = Cofree[Option, A](dummy, None)
   // need dummy because Cofree expects non-null
-def cons[A](head: A, tail: MyList[A]): MyList[A] = Cofree(head, Some(tail))
+def cons[A](head: A, tail: MyList[A]) = Cofree[Option, A](head, Some(tail))
 
 // some instances
 
