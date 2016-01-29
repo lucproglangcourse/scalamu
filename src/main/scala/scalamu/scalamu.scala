@@ -1,4 +1,4 @@
-import scalaz.Cofree
+import scalaz.{ Cofree, Functor, Show }
 import shapeless.contrib.scalaz.CofreeInstances
 /**
  * Small extensions to scalaz for working with F-algebras, where `F` is an
@@ -54,4 +54,8 @@ package object scalamu
 
   /** Alias for `In`. */
   val µ = In
+  
+  implicit def functorToStringShow[F[_], A](implicit A: Show[A], F: Functor[F]): Show[F[A]] = Show.shows { n =>
+    F.map(n)(A.shows _).toString
+  }
 }

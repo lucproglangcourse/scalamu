@@ -24,16 +24,12 @@ class NatFTests extends FunSuite {
     }
   }
   
-  // TODO generalize to some type of zip
+  // TODO generalize to some type of zip 
+  // TODO generalize for any functor F and put into library
   implicit def NatFEqual[A](implicit A: Equal[A]): Equal[NatF[A]] = Equal.equal {
     case (Succ(n), Succ(m)) => A.equal(n, m)
     case (Zero,    Zero)    => true
     case _                  => false
-  }
-  
-  // TODO generalize for any functor F and put into library
-  implicit def NatFShow[A](implicit A: Show[A]): Show[NatF[A]] = Show.shows { n =>
-    (n map A.shows _).toString
   }
 
   type Nat = µ[NatF]
