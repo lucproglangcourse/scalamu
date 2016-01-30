@@ -16,7 +16,7 @@ import scalaz.syntax.Ops
  */
 trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
 
-  implicit def FunctorF: Functor[F]
+  implicit def functorF: Functor[F]
 
   new ToCofreeCataOps {}
 
@@ -59,9 +59,9 @@ trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
 
 trait ToCofreeCataOps {
   import scala.language.implicitConversions
-  implicit def ToCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
+  implicit def toCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
     new CofreeCataOps[F, A] {
       def self = c
-      override val FunctorF = implicitly[Functor[F]]
+      override val functorF = implicitly[Functor[F]]
     }
 }

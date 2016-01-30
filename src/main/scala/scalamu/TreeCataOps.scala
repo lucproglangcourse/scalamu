@@ -40,7 +40,7 @@ trait TreeCataOps[A] extends Ops[Tree[A]] {
 
 trait ToTreeCataOps {
   import scala.language.implicitConversions
-  implicit def ToTreeCataOps[A](t: Tree[A]): TreeCataOps[A] = new TreeCataOps[A] {
+  implicit def toTreeCataOps[A](t: Tree[A]): TreeCataOps[A] = new TreeCataOps[A] {
     def self = t
   }
 }

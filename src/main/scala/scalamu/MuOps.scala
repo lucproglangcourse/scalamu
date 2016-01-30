@@ -13,7 +13,7 @@ import scalaz.syntax.Ops
  */
 trait MuOps[F[_]] extends Ops[µ[F]] {
 
-  implicit def FunctorF: Functor[F]
+  implicit def functorF: Functor[F]
 
   object ops extends ToCofreeCataOps
 
@@ -29,7 +29,7 @@ trait MuOps[F[_]] extends Ops[µ[F]] {
    * @return the result of applying `(| ϕ |)` to this instance of `µ[F]`
    */
   def cata[B](ϕ: F[B] => B): B =
-    ops.ToCofreeCataOps(self) cata Function.const(ϕ)
+    ops.toCofreeCataOps(self) cata Function.const(ϕ)
 
   /**
    * The paramorphism (generalized catamorphism) for the morphism `ψ`
@@ -47,14 +47,14 @@ trait MuOps[F[_]] extends Ops[µ[F]] {
    *         `Cofree[F, A]`
    */
   def para[B](ψ: F[µ[F]] => F[B] => B): B =
-    ops.ToCofreeCataOps(self) para Function.const(ψ)
+    ops.toCofreeCataOps(self) para Function.const(ψ)
 }
 
 trait ToMuOps {
   import scala.language.implicitConversions
-  implicit def ToMuOps[F[_]: Functor](c: µ[F]): MuOps[F] =
+  implicit def toMuOps[F[_]: Functor](c: µ[F]): MuOps[F] =
     new MuOps[F] {
       def self = c
-      override val FunctorF = implicitly[Functor[F]]
+      override val functorF = implicitly[Functor[F]]
     }
 }
