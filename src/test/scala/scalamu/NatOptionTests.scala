@@ -15,13 +15,13 @@ class NatOptionTests extends FunSuite {
   type Nat = µ[Option]
 
   val zero = In[Option](None)
-  def succ(n: Nat) = In[Option](Some(n))
+  val succ = (n: Nat) => In[Option](Some(n))
 
   val one = succ(zero)
   val two = succ(one)
   val three = succ(two)
 
-  def toInt: Algebra[Option, Int] = {
+  val toInt: Algebra[Option, Int] = {
     case None    => 0
     case Some(n) => n + 1
   }

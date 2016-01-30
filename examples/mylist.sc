@@ -20,9 +20,7 @@ import scalamu._               // algebra types and injected cata method
  */
 type MyList[A] = Cofree[Option, A]
 
-/**
- * Factory methods for convenience.
- */
+// factory methods for convenience
 def nil[A](dummy: A)                  = Cofree[Option, A](dummy, None)
   // need dummy because Cofree expects non-null
 def cons[A](head: A, tail: MyList[A]) = Cofree[Option, A](head, Some(tail))
@@ -66,7 +64,7 @@ list4 cata sum assert_=== 10
 /**
  * Generic `Option`-coalgebra for carrier object `Int` in category Scala types.
  */
-def downFrom: Coalgebra[Option, Int] = (n: Int) => {
+val downFrom: Coalgebra[Option, Int] = (n: Int) => {
   require { n >= 0 }
   if   (n == 0) None         /* 0: end of list */
   else          Some(n / 2)  /* > 0: create node for n and continue with n / 2 */

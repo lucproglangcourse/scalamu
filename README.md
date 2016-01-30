@@ -19,7 +19,7 @@ To use Scalaµ in your project, add these lines to your `build.sbt`:
 
     resolvers += "laufer@bintray" at "http://dl.bintray.com/laufer/maven"
 
-    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.3.0"
+    libraryDependencies += "edu.luc.etl" %% "scalamu" % "0.4.0"
 
 You can also just clone this project and play around with the example
 worksheets.
@@ -36,15 +36,15 @@ Natural numbers as the initial algebra for the `Option` endofunctor.
 
     type Nat = µ[Option]
 
-    val zero:         Nat = In(None)
-    def succ(n: Nat): Nat = In(Some(n))
+    val zero = In[Option](None)
+    val succ = (n: Nat) => In[Option](Some(n))
 
     val two   = succ(succ(zero))
     val three = succ(three)
 
 Conversion to `Int` as a catamorphism.
 
-    def toInt: Algebra[Option, Int] = {
+    val toInt: Algebra[Option, Int] = {
       case None    => 0
       case Some(n) => n + 1
     }
@@ -53,7 +53,7 @@ Conversion to `Int` as a catamorphism.
 
 Conversion from `Int` as an anamorphism.
 
-    def fromInt: Coalgebra[Option, Int] = (n: Int) => {
+    val fromInt: Coalgebra[Option, Int] = n => {
       require { n >= 0 }
       if   (n == 0) None
       else          Some(n - 1)
@@ -63,7 +63,7 @@ Conversion from `Int` as an anamorphism.
 
 Addition as another catamorphism.
 
-    def plus(m: Nat): Algebra[Option, Nat] = {
+    val plus: Nat => Algebra[Option, Nat] = m => {
       case None    => m
       case Some(n) => succ(n)
     }

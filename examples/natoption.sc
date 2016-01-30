@@ -28,11 +28,9 @@ import scalamu._                // algebra types and injected cata method
  */
 type Nat = µ[Option]
 
-/**
- * Factory methods for convenience.
- */
-val zero: Nat         = In[Option](None)
-def succ(n: Nat): Nat = In[Option](Some(n))
+// factory methods for convenience.
+val zero = In[Option](None)
+val succ = (n: Nat) => In[Option](Some(n))
 
 // some instances
 val one   = succ(zero)
@@ -48,8 +46,7 @@ val toInt: Algebra[Option, Int] = {
   case Some(n) => n + 1
 }
 
-// now we can fold the toInt algebra into instances
-
+// now we can fold the `toInt` algebra into instances
 zero  cata toInt assert_=== 0
 three cata toInt assert_=== 3
 
@@ -66,7 +63,7 @@ val fromInt: Coalgebra[Option, Int] = n => {
 
 /*
  * Unfold is an anamorphism for unfolding a Nat from a coalgebra
- * such as fromInt. This is an example of corecursion.
+ * such as `fromInt`. This is an example of corecursion.
  */
 µ.unfold(0)(fromInt) cata toInt assert_=== 0
 µ.unfold(7)(fromInt) cata toInt assert_=== 7
@@ -77,7 +74,7 @@ val fromInt: Coalgebra[Option, Int] = n => {
  *
  * @param m the number to which we are adding the argument of the algebra
  */
-def plus(m: Nat): Algebra[Option, Nat] = {
+val plus: Nat => Algebra[Option, Nat] = m => {
   case None    => m
   case Some(n) => succ(n)
 }
@@ -93,7 +90,7 @@ two   cata plus(three) cata toInt assert_=== 5
  *
  * @param m the number to which we are adding the argument of the algebra
  */
-def times(m: Nat): Algebra[Option, Nat] = {
+val times: Nat => Algebra[Option, Nat] = m => {
   case None    => zero
   case Some(n) => n cata plus(m)
 }
