@@ -29,7 +29,7 @@ case class Succ[+A](n: A) extends NatF[A]
  * Implicit value for declaring `NatF` as an instance of
  * typeclass `Functor` in scalaz.
  */
-implicit val NatFFunctor = new Functor[NatF] {
+implicit val natFFunctor = new Functor[NatF] {
   def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
     case Zero    => Zero: NatF[B]
     case Succ(n) => Succ(f(n))
@@ -37,10 +37,11 @@ implicit val NatFFunctor = new Functor[NatF] {
 }
 
 /** Declaration of `NatF` as an instance of `Equal`. */
-implicit def natFEqual[A: Equal](implicit A0: Equal[A]): Equal[NatF[A]] = Equal.equalA
-
-/** Declaration of `NatF` as an instance of `Show`. */
-implicit def natFShow[A](implicit A: Show[A]): Show[NatF[A]] = Show.showFromToString
+implicit def natFEqual[A](implicit aEqual: Equal[A]): Equal[NatF[A]] = Equal.equal {
+  case (Succ(n), Succ(m)) => aEqual.equal(n, m)
+  case (Zero,    Zero)    => true
+  case _                  => false
+}
 
 /**
  * Least fixpoint of `NatF` (recursive type based on `NatF`)
@@ -48,11 +49,9 @@ implicit def natFShow[A](implicit A: Show[A]): Show[NatF[A]] = Show.showFromToSt
  */
 type Nat = µ[NatF]
 
-/**
- * Factory methods for convenience.
- */
-val zero: Nat         = In(Zero)
-def succ(n: Nat): Nat = In(Succ(n))
+// Factory methods for convenience.
+val zero = In[NatF](Zero)
+val succ = (n: Nat) => In[NatF](Succ(n))
 
 // some instances
 val one   = succ(zero)
@@ -68,7 +67,7 @@ val toInt: Algebra[NatF, Int] = {
   case Succ(n) => n + 1
 }
 
-// now we can fold the toInt algebra into instances
+// now we can fold the `toInt` algebra into instances
 zero  cata toInt assert_=== 0
 three cata toInt assert_=== 3
 
@@ -85,7 +84,7 @@ val fromInt: Coalgebra[NatF, Int] = (n: Int) => {
 
 /*
  * Unfold is an anamorphism for unfolding a Nat from a coalgebra
- * such as fromInt. This is an example of corecursion.
+ * such as `fromInt`. This is an example of corecursion.
  *
  * We need to convert the item values back to Unit before applying toInt
  * because Cofree is generic in the item type and preserves it.
@@ -100,7 +99,7 @@ val fromInt: Coalgebra[NatF, Int] = (n: Int) => {
  *
  * @param m the number to which we are adding the argument of the algebra
  */
-def plus(m: Nat): Algebra[NatF, Nat] = {
+val plus: Nat => Algebra[NatF, Nat] = m => {
   case Zero    => m
   case Succ(n) => succ(n)
 }
@@ -115,7 +114,7 @@ two   cata plus(three) cata toInt assert_=== 5
 (Succ(Zero): NatF[NatF[Unit]]) assert_=== Succ(Zero)
 assert { (Succ(Zero): NatF[NatF[Unit]]) =/= Zero }
 zero assert_=== zero
-three assert_=== succ(succ(succ(three)))
+three assert_=== succ(succ(succ(zero)))
 assert { three =/= zero }
 
 // imports required for checking equality and functor laws
@@ -126,7 +125,7 @@ import scalaz.scalacheck.ScalaCheckBinding._
 import scalaz.scalacheck.ScalazProperties._
 import org.scalacheck.Arbitrary
 
-implicit def NatFArbitrary[A](implicit a: Arbitrary[A]): Arbitrary[NatF[A]] =
+implicit def natFArbitrary[A](implicit a: Arbitrary[A]): Arbitrary[NatF[A]] =
   a map { a => (Succ(a): NatF[A]) }
 
 // the equality and functor laws should both hold
