@@ -31,8 +31,8 @@ type Nat = µ[Option]
 /**
  * Factory methods for convenience.
  */
-val zero: Nat         = In(None)
-def succ(n: Nat): Nat = In(Some(n))
+val zero: Nat         = In[Option](None)
+def succ(n: Nat): Nat = In[Option](Some(n))
 
 // some instances
 val one   = succ(zero)

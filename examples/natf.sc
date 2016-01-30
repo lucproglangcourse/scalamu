@@ -37,27 +37,10 @@ implicit val NatFFunctor = new Functor[NatF] {
 }
 
 /** Declaration of `NatF` as an instance of `Equal`. */
-trait NatFEqual[A] extends Equal[NatF[A]] {
-  implicit def A: Equal[A]
-  override def equalIsNatural: Boolean = A.equalIsNatural
-  override def equal(a1: NatF[A], a2: NatF[A]) = (a1, a2) match {
-    case (Zero, Zero)       => true
-    case (Succ(l), Succ(r)) => A.equal(l, r)
-    case _ => false
-  }
-}
-implicit def natFEqual[A](implicit A0: Equal[A]): Equal[NatF[A]] = new NatFEqual[A] {
-  implicit def A = A0
-}
+implicit def natFEqual[A: Equal](implicit A0: Equal[A]): Equal[NatF[A]] = Equal.equalA
 
 /** Declaration of `NatF` as an instance of `Show`. */
-implicit def natFShow[A](implicit A: Show[A]): Show[NatF[A]] = new Show[NatF[A]] {
-  override def show(e: NatF[A]): scalaz.Cord = e match {
-    case Zero    => "Zero"
-    case Succ(r) => "Succ(" +: A.show(r) :+ ")"
-  }
-}
-
+implicit def natFShow[A](implicit A: Show[A]): Show[NatF[A]] = Show.showFromToString
 
 /**
  * Least fixpoint of `NatF` (recursive type based on `NatF`)
@@ -132,7 +115,7 @@ two   cata plus(three) cata toInt assert_=== 5
 (Succ(Zero): NatF[NatF[Unit]]) assert_=== Succ(Zero)
 assert { (Succ(Zero): NatF[NatF[Unit]]) =/= Zero }
 zero assert_=== zero
-three assert_=== three
+three assert_=== succ(succ(succ(three)))
 assert { three =/= zero }
 
 // imports required for checking equality and functor laws
