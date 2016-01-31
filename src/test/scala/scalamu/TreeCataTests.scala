@@ -1,8 +1,9 @@
-package scalamu
+package scalamu.test
 
 import scalaz.Tree
 import scalaz.syntax.tree._
 import org.scalatest._
+import scalamu._
 
 /**
  * Small sample test, to be expanded later to a proper test suite.

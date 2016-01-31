@@ -12,8 +12,6 @@ import scalaz.syntax.Ops
  */
 trait TreeCataOps[A] extends Ops[Tree[A]] {
 
-  new ToTreeCataOps {}
-
   /**
    * The catamorphism (generalized tree fold) for a generic F-algebra.
    *
