@@ -2,7 +2,7 @@ organization := "edu.luc.etl"
 
 name := "scalamu"
 
-version := "0.4.0"
+version := "0.4.1"
 
 scalaVersion := "2.11.7"
 

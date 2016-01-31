@@ -18,8 +18,6 @@ trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
 
   implicit def functorF: Functor[F]
 
-  new ToCofreeCataOps {}
-
   /**
    * The catamorphism (generalized fold) for the generic F-algebra `f`
    * with carrier object `B`.
