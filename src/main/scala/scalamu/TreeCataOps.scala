@@ -10,7 +10,7 @@ import scalaz.syntax.Ops
  *
  * @tparam A generic item type of this tree
  */
-private[scalamu] final class TreeCataOps[A](val self: Tree[A]) extends Ops[Tree[A]] {
+final class TreeCataOps[A](val self: Tree[A]) extends Ops[Tree[A]] {
 
   /**
    * The catamorphism (generalized tree fold) for a generic F-algebra.
@@ -36,6 +36,7 @@ private[scalamu] final class TreeCataOps[A](val self: Tree[A]) extends Ops[Tree[
     p(self.rootLabel)(self.subForest)(self.subForest map { _ para p })
 }
 
+/** Trait for combining multiple implicit wrapper mathods into package object. */
 trait ToTreeCataOps {
   implicit def ToTreeCataOps[A](t: Tree[A]): TreeCataOps[A] = new TreeCataOps[A](t)
 }
