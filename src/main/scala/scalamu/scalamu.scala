@@ -55,6 +55,12 @@ package object scalamu
   /** Alias for `In`. */
   val µ = In
   
+  /** 
+   * Declaration of any `Functor` as an instance of `Show` using `toString`
+   * on the case classes underlying the functor. Requires the item type
+   * of the functor to be an instance of `Show`. Maps the corresponding
+   * `show` method over the functor and then applies `toString`.
+   */ 
   implicit def functorToStringShow[F[_], A](implicit A: Show[A], F: Functor[F]): Show[F[A]] = Show.shows { n =>
     F.map(n)(A.shows _).toString
   }

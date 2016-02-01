@@ -1,6 +1,8 @@
 import scalaz.Functor
 import scalaz.std.anyVal._     // for assert_=== to work on basic values
+import scalaz.std.option._
 import scalaz.syntax.equal._   // for assert_===
+import scalamu._               // algebra types and injected cata method
 
 /*
  * In this example, we demonstrate that we can unify the natf and natoption
@@ -29,7 +31,7 @@ trait FInitial[F[+_]] {
   def out[A]: F[A] => Option[A]
 
   /** The `Functor` typeclass instance. */
-  implicit val functorF = new Functor[F] {
+  implicit val fFunctor = new Functor[F] {
     def map[A, B](fa: F[A])(f: A => B): F[B] = out(fa) match {
       case None    => z: F[B]
       case Some(n) => s(f(n))
@@ -44,8 +46,7 @@ trait FInitial[F[+_]] {
  * @tparam F the endofunctor we are going to examine
  * @param fi the initial algebra of the endofunctor
  */
-def test[F[+_]](fi: FInitial[F]) = {
-  import scalamu._                // algebra types and injected cata method
+def test[F[+_]](fi: FInitial[F]): Unit = {
   import fi._
 
   val zero: µ[F] = In[F](z)
@@ -60,8 +61,11 @@ def test[F[+_]](fi: FInitial[F]) = {
     case Some(n) => n + 1
   }
 
-  zero  cata toInt assert_=== 0
-  // three cata toInt assert_=== 3
+  // unsure why this works only when applied to `F`
+  implicit val enableCata = ToMuOps[F] _
+
+  zero cata toInt assert_=== 0
+  three cata toInt assert_=== 3
 
   val fromInt: Coalgebra[F, Int] = (n: Int) => {
     require { n >= 0 }
@@ -69,17 +73,17 @@ def test[F[+_]](fi: FInitial[F]) = {
     else          s(n - 1)
   }
 
-  // µ.unfold(0)(fromInt) cata toInt assert_=== 0
-  // µ.unfold(7)(fromInt) cata toInt assert_=== 7
+  µ.unfold(0)(fromInt) cata toInt assert_=== 0
+  µ.unfold(7)(fromInt) cata toInt assert_=== 7
 
   val plus: µ[F] => Algebra[F, µ[F]] = m => out(_) match {
     case None    => m
     case Some(n) => succ(n)
   }
-  // zero  cata plus(zero)  cata toInt assert_=== 0
-  // zero  cata plus(three) cata toInt assert_=== 3
-  // three cata plus(zero)  cata toInt assert_=== 3
-  // two   cata plus(three) cata toInt assert_=== 5
+  zero  cata plus(zero)  cata toInt assert_=== 0
+  zero  cata plus(three) cata toInt assert_=== 3
+  three cata plus(zero)  cata toInt assert_=== 3
+  two   cata plus(three) cata toInt assert_=== 5
 }
 
 /**
@@ -87,9 +91,9 @@ def test[F[+_]](fi: FInitial[F]) = {
  * This is conceptually the identity descriptor.
  */
 object OptionC extends FInitial[Option] {
-  val z = None
-  def s[A]: A => Option[A] = Some(_)
-  def out[A]: Option[A] => Option[A] = identity _
+  override val z = None
+  override def s[A] = Some(_)
+  override def out[A] = identity _
 }
 
 /**
@@ -102,9 +106,9 @@ object NatFWrapper {
   case object Zero extends NatF[Nothing]
   case class Succ[+A](n: A) extends NatF[A]
   object C extends FInitial[NatF] {
-    val z: NatF[Nothing]   = Zero
-    def s[A]: A => NatF[A] = Succ(_)
-    def out[A]: NatF[A] => Option[A] = {
+    override val z = Zero
+    override def s[A] = Succ(_)
+    override def out[A] = {
       case Zero    => None
       case Succ(n) => Some(n)
     }
