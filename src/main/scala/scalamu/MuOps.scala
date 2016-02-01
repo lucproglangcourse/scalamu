@@ -11,7 +11,7 @@ import scalaz.syntax.Ops
  *           (type constructor of arity 1 with a `map` function that obeys
  *           certain laws).
  */
-private[scalamu] final class MuOps[F[_]: Functor](val self: µ[F]) extends Ops[µ[F]] {
+final class MuOps[F[_]: Functor](val self: µ[F]) extends Ops[µ[F]] {
 
   private object ops extends ToCofreeCataOps
 
@@ -48,6 +48,7 @@ private[scalamu] final class MuOps[F[_]: Functor](val self: µ[F]) extends Ops[�
     ops.ToCofreeCataOps(self) para Function.const(ψ)
 }
 
+/** Trait for combining multiple implicit wrapper mathods into package object. */
 trait ToMuOps {
   implicit def ToMuOps[F[_]: Functor](c: µ[F]): MuOps[F] = new MuOps[F](c)
 }

@@ -5,8 +5,6 @@ import scalaz.Functor
 import scalaz.syntax.functor._
 import scalaz.syntax.Ops
 
-// TODO http://stackoverflow.com/questions/20699105/using-implicit-class-to-override-method
-
 /**
  * Wraps a value `self` and provides catamorphism and related recursion
  * patterns for injection into `Cofree`.
@@ -14,7 +12,7 @@ import scalaz.syntax.Ops
  * @tparam F branching endofunctor of this structure
  * @tparam A generic item type of this structure
  */
-private[scalamu] final class CofreeCataOps[F[_]: Functor, A](val self: Cofree[F, A]) extends Ops[Cofree[F, A]] {
+final class CofreeCataOps[F[_]: Functor, A](val self: Cofree[F, A]) extends Ops[Cofree[F, A]] {
 
   /**
    * The catamorphism (generalized fold) for the generic F-algebra `f`
@@ -51,6 +49,7 @@ private[scalamu] final class CofreeCataOps[F[_]: Functor, A](val self: Cofree[F,
     p(self.head)(self.tail)(self.tail map { _ para p })
 }
 
+/** Trait for combining multiple implicit wrapper mathods into package object. */
 trait ToCofreeCataOps {
   implicit def ToCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
     new CofreeCataOps[F, A](c)
