@@ -10,7 +10,7 @@ import scalaz.syntax.Ops
  *
  * @tparam A generic item type of this tree
  */
-trait TreeCataOps[A] extends Ops[Tree[A]] {
+private[scalamu] final class TreeCataOps[A](val self: Tree[A]) extends Ops[Tree[A]] {
 
   /**
    * The catamorphism (generalized tree fold) for a generic F-algebra.
@@ -37,8 +37,5 @@ trait TreeCataOps[A] extends Ops[Tree[A]] {
 }
 
 trait ToTreeCataOps {
-  import scala.language.implicitConversions
-  implicit def toTreeCataOps[A](t: Tree[A]): TreeCataOps[A] = new TreeCataOps[A] {
-    def self = t
-  }
+  implicit def ToTreeCataOps[A](t: Tree[A]): TreeCataOps[A] = new TreeCataOps[A](t)
 }

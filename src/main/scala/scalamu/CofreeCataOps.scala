@@ -14,9 +14,7 @@ import scalaz.syntax.Ops
  * @tparam F branching endofunctor of this structure
  * @tparam A generic item type of this structure
  */
-trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
-
-  implicit def functorF: Functor[F]
+private[scalamu] final class CofreeCataOps[F[_]: Functor, A](val self: Cofree[F, A]) extends Ops[Cofree[F, A]] {
 
   /**
    * The catamorphism (generalized fold) for the generic F-algebra `f`
@@ -51,15 +49,9 @@ trait CofreeCataOps[F[_], A] extends Ops[Cofree[F, A]] {
    */
   def para[B](p: A => F[Cofree[F, A]] => F[B] => B): B =
     p(self.head)(self.tail)(self.tail map { _ para p })
-    
-  
 }
 
 trait ToCofreeCataOps {
-  import scala.language.implicitConversions
-  implicit def toCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
-    new CofreeCataOps[F, A] {
-      def self = c
-      override val functorF = implicitly[Functor[F]]
-    }
+  implicit def ToCofreeCataOps[F[_]: Functor, A](c: Cofree[F, A]): CofreeCataOps[F, A] =
+    new CofreeCataOps[F, A](c)
 }
