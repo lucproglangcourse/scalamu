@@ -40,6 +40,16 @@ package object scalamu
   type Coalgebra[F[_], B] = B => F[B]
 
   /**
+    * A generic F-coalgebra with carrier object `B`.
+    *
+    * @tparam A the generic type parameter of the F-algebra
+    *           (instances of `A` held by instances of `Cofree`)
+    * @tparam F an endofunctor of the category Scala types
+    * @tparam B a carrier object (Scala type)
+    */
+  type GenericCoalgebra[A, F[_], B] = B => (A, F[B])
+
+  /**
    * The least fixpoint operator on endofunctors in the category Scala types.
    * This is used to form the carrier object (recursive type) for the initial
    * F-algebra.
