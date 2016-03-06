@@ -16,11 +16,11 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalaz" %% "scalaz-core" % "7.2.0",
+  "org.scalaz" %% "scalaz-core" % "7.2.1",
   "org.typelevel" %% "shapeless-scalaz" % "0.4",
   "org.scalatest" %% "scalatest" % "2.2.6" % Test,
-  "org.scalacheck" %% "scalacheck" % "1.12.5" % Test,
-  "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.0" % Test
+  "org.scalacheck" %% "scalacheck" % "1.13.0" % Test,
+  "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.1" % Test
 )
 
 autoAPIMappings := true
