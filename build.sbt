@@ -15,6 +15,12 @@ scalacOptions ++= Seq(
   "-language:higherKinds", "-language:implicitConversions"
 )
 
+scalacOptions in (Compile, doc) ++= Seq(
+  "-groups", "-implicits",
+  "-sourcepath", baseDirectory.value.toString,
+  "-doc-source-url", "https://github.com/LoyolaChicagoCode/scalamu/tree/master€{FILE_PATH}.scala"
+)
+
 libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-core" % "7.2.1",
   "org.typelevel" %% "shapeless-scalaz" % "0.4",
