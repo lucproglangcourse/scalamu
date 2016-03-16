@@ -40,7 +40,7 @@ Natural numbers as the initial algebra for the `Option` endofunctor.
     val succ = (n: Nat) => In[Option](Some(n))
 
     val two   = succ(succ(zero))
-    val three = succ(three)
+    val three = succ(two)
 
 Conversion to `Int` as a catamorphism.
 
