@@ -24,7 +24,7 @@ scalacOptions in (Compile, doc) ++= Seq(
 libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-core" % "7.2.8",
   "org.typelevel" %% "shapeless-scalaz" % "0.4",
-  "org.scalatest" %% "scalatest" % "3.0.1" % Test,
+  "org.scalatest" %% "scalatest" % "2.2.6" % Test,
   "org.scalacheck" %% "scalacheck" % "1.12.6" % Test,
   "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.8" % Test
 )
