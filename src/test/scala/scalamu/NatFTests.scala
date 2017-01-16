@@ -2,7 +2,7 @@ package scalamu.test
 
 import org.scalatest.FunSuite
 import scalaz.{ Equal, Functor, Show }
-import scalaz.std.anyVal._   // for Unit as Equal instance
+import scalaz.std.anyVal._ // for Unit as Equal instance
 import scalaz.syntax.equal._ // for ≟ and ≠
 import scalaz.syntax.show._ // for .show syntax
 import scalaz.syntax.functor._ // for .map syntax
@@ -17,31 +17,31 @@ class NatFTests extends FunSuite {
 
   implicit val natFFunctor = new Functor[NatF] {
     def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
-      case Zero    => Zero
+      case Zero => Zero
       case Succ(n) => Succ(f(n))
     }
   }
-  
+
   implicit def natFEqual[A](implicit A: Equal[A]): Equal[NatF[A]] = Equal.equal {
     case (Succ(n), Succ(m)) => A.equal(n, m)
-    case (Zero,    Zero)    => true
-    case _                  => false
+    case (Zero, Zero) => true
+    case _ => false
   }
 
   type Nat = µ[NatF]
-  
+
   val zero = In[NatF](Zero)
   val succ = (n: Nat) => In[NatF](Succ(n))
 
-  val one   = succ(zero)
-  val two   = succ(one)
+  val one = succ(zero)
+  val two = succ(one)
   val three = succ(two)
 
   val toInt: Algebra[NatF, Int] = {
-    case Zero    => 0
+    case Zero => 0
     case Succ(n) => n + 1
   }
-  
+
   // using ≟ and ≠ to avoid ambiguity of ===
 
   test("Equality on NatF should work") {
