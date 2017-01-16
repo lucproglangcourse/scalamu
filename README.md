@@ -2,7 +2,7 @@
 [ ![Download](https://api.bintray.com/packages/laufer/maven/scalamu/images/download.svg) ](https://bintray.com/laufer/maven/scalamu/_latestVersion)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-[![Coverage Status](https://coveralls.io/repos/LoyolaChicagoCode/scalamu/badge.svg?branch=master)](https://coveralls.io/r/LoyolaChicagoCode/scalamu?branch=master)
+[![codecov.io](https://codecov.io/gh/LoyolaChicagoCode/scalamu/branch/master/graph/badge.svg)](https://codecov.io/gh/LoyolaChicagoCode/scalamu)
 [![Codacy Badge](https://www.codacy.com/project/badge/8996f07e06ad46019b85c351db66df77)](https://www.codacy.com/public/laufer/scalamu)
 
 [![Issue Stats](http://issuestats.com/github/LoyolaChicagoCode/scalamu/badge/pr)](http://issuestats.com/github/LoyolaChicagoCode/scalamu)
