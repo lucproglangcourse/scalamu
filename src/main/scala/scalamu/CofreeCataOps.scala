@@ -28,8 +28,8 @@ final class CofreeCataOps[F[_]: Functor, A](val self: Cofree[F, A]) extends Ops[
    */
   def cata[B](f: A => F[B] => B): B =
     para((a => _ => fb => f(a)(fb)): A => F[Cofree[F, A]] => F[B] => B)
-    // equivalent to f(self.head)(self.tail map { _ cata f })
-    // per definition of para below (f doesn't need the extra self.tail arg)
+  // equivalent to f(self.head)(self.tail map { _ cata f })
+  // per definition of para below (f doesn't need the extra self.tail arg)
 
   /**
    * The paramorphism (generalized catamorphism) for the morphism `p`.
