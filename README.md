@@ -7,6 +7,8 @@
 
 [![Issue Stats](http://issuestats.com/github/LoyolaChicagoCode/scalamu/badge/pr)](http://issuestats.com/github/LoyolaChicagoCode/scalamu)
 [![Issue Stats](http://issuestats.com/github/LoyolaChicagoCode/scalamu/badge/issue)](http://issuestats.com/github/LoyolaChicagoCode/scalamu)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/LoyolaChicagoCode/scalamu.svg)](http://isitmaintained.com/project/LoyolaChicagoCode/scalamu "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/LoyolaChicagoCode/scalamu.svg)](http://isitmaintained.com/project/LoyolaChicagoCode/scalamu "Percentage of issues still open")
 
 
 # Scalaµ
