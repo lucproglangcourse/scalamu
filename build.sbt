@@ -2,7 +2,7 @@ organization := "edu.luc.etl"
 
 name := "scalamu"
 
-version := "0.4.3"
+version := "0.4.4"
 
 scalaVersion := "2.11.8"
 
@@ -25,7 +25,7 @@ libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-core" % "7.2.8",
   "org.typelevel" %% "shapeless-scalaz" % "0.4",
   "org.scalatest" %% "scalatest" % "3.0.1" % Test,
-  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
+  "org.scalacheck" %% "scalacheck" % "1.12.5" % Test,
   "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.8" % Test
 )
 

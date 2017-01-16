@@ -1,8 +1,8 @@
 package scalamu.test
 
 import org.scalatest.FunSuite
-import scalaz.std.option._   // for Option as Functor and Equal instance
-import scalaz.std.anyVal._   // for Unit as Equal instance
+import scalaz.std.option._ // for Option as Functor and Equal instance
+import scalaz.std.anyVal._ // for Unit as Equal instance
 import scalaz.syntax.equal._ // for ≟ and ≠
 import scalaz.syntax.show._ // for .show syntax
 import scalamu._
@@ -22,10 +22,10 @@ class NatOptionTests extends FunSuite {
   val three = succ(two)
 
   val toInt: Algebra[Option, Int] = {
-    case None    => 0
+    case None => 0
     case Some(n) => n + 1
   }
-  
+
   test("Equality on naturals should work") {
     assert { zero ≟ zero }
     assert { one ≠ zero }
