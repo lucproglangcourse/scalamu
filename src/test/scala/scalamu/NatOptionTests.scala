@@ -22,7 +22,7 @@ class NatOptionTests extends FunSuite {
   val three = succ(two)
 
   val toInt: Algebra[Option, Int] = {
-    case None => 0
+    case None    => 0
     case Some(n) => n + 1
   }
 

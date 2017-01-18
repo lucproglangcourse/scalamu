@@ -17,15 +17,15 @@ class NatFTests extends FunSuite {
 
   implicit val natFFunctor = new Functor[NatF] {
     def map[A, B](fa: NatF[A])(f: A => B): NatF[B] = fa match {
-      case Zero => Zero
+      case Zero    => Zero
       case Succ(n) => Succ(f(n))
     }
   }
 
   implicit def natFEqual[A](implicit A: Equal[A]): Equal[NatF[A]] = Equal.equal {
     case (Succ(n), Succ(m)) => A.equal(n, m)
-    case (Zero, Zero) => true
-    case _ => false
+    case (Zero, Zero)       => true
+    case _                  => false
   }
 
   type Nat = µ[NatF]
@@ -38,7 +38,7 @@ class NatFTests extends FunSuite {
   val three = succ(two)
 
   val toInt: Algebra[NatF, Int] = {
-    case Zero => 0
+    case Zero    => 0
     case Succ(n) => n + 1
   }
 
