@@ -28,7 +28,7 @@ class TreeCataTests extends FunSuite {
 
   def depth[A]: A => Stream[Int] => Int = _ => {
     case Stream.Empty => 1
-    case s => 1 + s.max
+    case s            => 1 + s.max
   }
 
   test("Simple catamorphisms on trees should work") {
