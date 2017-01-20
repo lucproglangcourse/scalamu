@@ -18,6 +18,10 @@ examples for exploring and [teaching](lucproglangcourse.github.io)
 the software engineering benefits of defining algebraic data types
 as initial F-algebras.
 
+# DEPRECATED
+
+This project has been deprecated in favor of the much more complete and mature https://github.com/slamdata/matryoshka.
+
 # Getting Scalaµ
 
 To use Scalaµ in your project, add these lines to your `build.sbt`:
